@@ -1,7 +1,22 @@
-import type { Express } from "express";
+import type { Express, Request, Response, NextFunction } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { setupAuth, requireAuth, requireSubscription } from "./auth";
+
+// Simple middleware to check if user is admin
+// In a real app, you would have proper role-based authorization
+function requireAdmin(req: Request, res: Response, next: NextFunction) {
+  if (!req.isAuthenticated()) {
+    return res.status(401).json({ message: "Authentication required" });
+  }
+  
+  // For demo purposes, user with id=1 is admin
+  if (req.user?.id !== 1) {
+    return res.status(403).json({ message: "Admin access required" });
+  }
+  
+  next();
+}
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Setup authentication routes
@@ -258,6 +273,29 @@ export async function registerRoutes(app: Express): Promise<Server> {
     } catch (error) {
       console.error("Error creating subscription:", error);
       res.status(500).json({ message: "Failed to create subscription" });
+    }
+  });
+
+  // Admin API endpoints - Admin Only
+  // Get all users
+  app.get("/api/users", requireAdmin, async (req, res) => {
+    try {
+      const users = await storage.getAllUsers();
+      res.json(users);
+    } catch (error) {
+      console.error("Error fetching users:", error);
+      res.status(500).json({ message: "Failed to fetch users" });
+    }
+  });
+
+  // Get all user books
+  app.get("/api/all-user-books", requireAdmin, async (req, res) => {
+    try {
+      const allUserBooks = await storage.getAllUserBooks();
+      res.json(allUserBooks);
+    } catch (error) {
+      console.error("Error fetching all user books:", error);
+      res.status(500).json({ message: "Failed to fetch all user books" });
     }
   });
 

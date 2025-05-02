@@ -9,8 +9,8 @@ interface SkillbagLogoProps {
 
 export function SkillbagLogo({ width = 200, height = 48, className = '', isWhite = false }: SkillbagLogoProps) {
   // Colors based on the exact image
-  const orangeColor = isWhite ? "#FFFFFF" : "#FF7F00"; 
-  const blueColor = isWhite ? "#FFFFFF" : "#1A237E";
+  const orangeColor = isWhite ? "#FFFFFF" : "#FF6B00"; // Brighter orange for better visibility
+  const blueColor = isWhite ? "#FFFFFF" : "#0C2D69"; // Navy blue
   
   return (
     <svg 
@@ -23,7 +23,7 @@ export function SkillbagLogo({ width = 200, height = 48, className = '', isWhite
     >
       {/* Logo Group */}
       <g>
-        {/* Orange Spiral/Swirl - exact match to image */}
+        {/* Orange Spiral/Swirl - enhanced design */}
         <path 
           d="M45,24 C45,8 3,8 3,24 C3,40 45,40 45,24 C45,16 30,16 30,24 C30,32 45,32 45,24" 
           fill={orangeColor}
