@@ -41,7 +41,11 @@ export default function NavBar() {
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         <div className="flex items-center">
           <div className="flex items-center">
-            <SkillbagLogo width={160} height={40} />
+            <img 
+              src="/images/skillbag-logo.svg" 
+              alt="Skillbag Logo" 
+              className="h-10" 
+            />
           </div>
         </div>
         
