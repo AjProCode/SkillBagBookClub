@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
+import { SkillbagLogo } from "@/components/ui/skillbag-logo";
 
 const loginSchema = z.object({
   username: z.string().min(3, "Username must be at least 3 characters"),
@@ -97,12 +98,9 @@ export default function AuthPage() {
           <div className="w-full md:w-1/2 p-8">
             <div className="mb-8">
               <div className="flex items-center mb-2">
-                <img 
-                  src="/images/skillbag-logo.svg" 
-                  alt="Skillbag Logo" 
-                  className="h-12 w-12 mr-3" 
-                />
-                <h1 className="font-heading font-bold text-2xl text-primary">Skillbag</h1>
+                <div className="mr-3">
+                  <SkillbagLogo width={150} height={40} />
+                </div>
               </div>
               <p className="text-gray-600">Join our community of young readers!</p>
             </div>
@@ -238,7 +236,7 @@ export default function AuthPage() {
           </div>
           
           {/* Hero Section */}
-          <div className="w-full md:w-1/2 bg-gradient-to-br from-primary via-accent to-secondary text-white p-8 flex flex-col justify-center">
+          <div className="w-full md:w-1/2 bg-secondary text-white p-8 flex flex-col justify-center">
             <h2 className="font-heading font-bold text-3xl mb-4">Discover the Joy of Reading!</h2>
             <ul className="space-y-4">
               <li className="flex items-start">
@@ -279,13 +277,13 @@ export default function AuthPage() {
                 <div className="bg-secondary text-white p-2 rounded-lg">
                   <i className="ri-star-fill"></i>
                 </div>
-                <p className="ml-3 font-medium">Special Offer: ₹1499 for 3 months subscription!</p>
+                <p className="ml-3 font-medium">Premium Subscription: ₹3000 for 3 months!</p>
               </div>
             </div>
             <img 
-              src="https://images.unsplash.com/photo-1512820790803-83ca734da794?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
-              alt="Children reading books" 
-              className="mt-8 rounded-xl self-center max-w-full" 
+              src="https://images.unsplash.com/photo-1515940175183-6b248b0f53ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=80" 
+              alt="Teenage student reading" 
+              className="mt-8 rounded-xl self-center max-w-full shadow-lg border-2 border-white/20" 
             />
           </div>
         </div>
