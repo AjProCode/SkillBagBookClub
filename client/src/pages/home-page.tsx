@@ -100,9 +100,9 @@ export default function HomePage() {
             <div className="mb-6 md:mb-0">
               <div className="flex items-center">
                 <img 
-                  src="/images/skillbag-logo.jpeg" 
+                  src="/assets/skillbag-logo.jpeg" 
                   alt="Skillbag Logo" 
-                  className="h-10 brightness-0 invert"
+                  className="h-12 brightness-0 invert"
                 />
               </div>
               <p className="mt-3 text-white/80 max-w-xs">
