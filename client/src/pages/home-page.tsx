@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import NavBar from "@/components/nav-bar";
 import { Button } from "@/components/ui/button";
+import { SkillbagLogo } from "@/components/ui/skillbag-logo";
 
 export default function HomePage() {
   return (
@@ -98,9 +99,7 @@ export default function HomePage() {
           <div className="flex flex-col md:flex-row justify-between">
             <div className="mb-6 md:mb-0">
               <div className="flex items-center">
-                <img src="./images/skillbag-logo.svg" 
-                  alt="Skillbag Logo" 
-                  className="h-12 w-12" />
+                <SkillbagLogo width={48} height={48} />
                 <h2 className="ml-3 font-heading font-bold text-xl">Skillbag</h2>
               </div>
               <p className="mt-3 text-white/80 max-w-xs">

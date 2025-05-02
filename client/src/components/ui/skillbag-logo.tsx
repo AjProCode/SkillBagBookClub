@@ -1,0 +1,34 @@
+import React from 'react';
+
+interface SkillbagLogoProps {
+  width?: number;
+  height?: number;
+  className?: string;
+}
+
+export function SkillbagLogo({ width = 200, height = 200, className = '' }: SkillbagLogoProps) {
+  return (
+    <svg 
+      width={width} 
+      height={height} 
+      viewBox="0 0 200 200" 
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+    >
+      {/* Backpack/Bag */}
+      <g>
+        {/* Main Bag Shape */}
+        <path d="M50,60 C45,60 40,65 40,70 L40,160 C40,170 50,180 60,180 L140,180 C150,180 160,170 160,160 L160,70 C160,65 155,60 150,60 L130,60 C130,45 115,30 100,30 C85,30 70,45 70,60 Z" fill="#2E8B57" />
+        
+        {/* Bag Front Pocket */}
+        <rect x="65" y="90" width="70" height="60" rx="10" ry="10" fill="#3CB371" />
+        
+        {/* Straps */}
+        <path d="M70,60 C70,60 75,40 100,40 C125,40 130,60 130,60" stroke="#2E8B57" strokeWidth="8" fill="none" />
+      </g>
+      
+      {/* Skillbag Text */}
+      <text x="100" y="140" fontFamily="Arial" fontSize="22" fontWeight="bold" textAnchor="middle" fill="#7B2CBF">SKILLBAG</text>
+    </svg>
+  );
+}

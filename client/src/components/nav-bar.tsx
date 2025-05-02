@@ -3,6 +3,7 @@ import { Link, useLocation } from "wouter";
 import { useAuth } from "@/hooks/use-auth";
 import { useMobile } from "@/hooks/use-mobile";
 import { Button } from "@/components/ui/button";
+import { SkillbagLogo } from "@/components/ui/skillbag-logo";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { 
   DropdownMenu, 
@@ -39,11 +40,7 @@ export default function NavBar() {
     <header className="bg-white shadow-md">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         <div className="flex items-center">
-          <img 
-            src="./images/skillbag-logo.svg" 
-            alt="Skillbag Logo" 
-            className="h-12 w-12" 
-          />
+          <SkillbagLogo width={48} height={48} />
           <h1 className="ml-3 font-heading font-bold text-2xl text-primary">Skillbag</h1>
         </div>
         
