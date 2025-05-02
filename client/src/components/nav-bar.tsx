@@ -42,9 +42,9 @@ export default function NavBar() {
         <div className="flex items-center">
           <div className="flex items-center">
             <img 
-              src="/images/skillbag-logo.svg" 
+              src="/images/skillbag-logo-original.png" 
               alt="Skillbag Logo" 
-              className="h-10" 
+              className="h-12 w-auto"
             />
           </div>
         </div>
