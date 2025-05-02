@@ -1,21 +1,83 @@
 import React from 'react';
 
 export const SkillbagLogo = ({ height = 50, className = '' }) => {
+  const width = height * 3;
   return (
-    <svg width={height * 2} height={height} viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
-      <circle cx="50" cy="50" r="35" fill="#FF7F00" />
-      <path d="M35 35C35 35 50 25 65 35C80 45 65 70 50 65C35 60 35 35 35 35Z" fill="white" />
-      <text x="75" y="60" fontFamily="Arial" fontSize="32" fontWeight="bold" fill="#1A237E">Skillbag</text>
-    </svg>
+    <div className={`relative overflow-visible ${className}`} style={{ height: `${height}px`, width: `${width}px` }}>
+      <div className="font-bold" style={{ 
+        fontSize: `${height * 0.7}px`, 
+        color: '#1A237E',
+        display: 'inline-block',
+        position: 'absolute',
+        left: `${height * 0.8}px`,
+        top: '50%',
+        transform: 'translateY(-50%)'
+      }}>
+        Skillbag
+      </div>
+      <div style={{ 
+        height: `${height}px`, 
+        width: `${height}px`, 
+        borderRadius: '50%', 
+        backgroundColor: '#FF7F00',
+        position: 'absolute',
+        left: 0,
+        top: '50%',
+        transform: 'translateY(-50%)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
+        <div style={{ 
+          height: `${height * 0.6}px`, 
+          width: `${height * 0.6}px`, 
+          borderRadius: '50%', 
+          border: `${height * 0.08}px solid white`,
+          borderTopColor: 'transparent',
+          transform: 'rotate(45deg)'
+        }}></div>
+      </div>
+    </div>
   );
 };
 
 export const SkillbagLogoWhite = ({ height = 50, className = '' }) => {
+  const width = height * 3;
   return (
-    <svg width={height * 2} height={height} viewBox="0 0 200 100" fill="none" xmlns="http://www.w3.org/2000/svg" className={className}>
-      <circle cx="50" cy="50" r="35" fill="white" />
-      <path d="M35 35C35 35 50 25 65 35C80 45 65 70 50 65C35 60 35 35 35 35Z" fill="#FF7F00" />
-      <text x="75" y="60" fontFamily="Arial" fontSize="32" fontWeight="bold" fill="white">Skillbag</text>
-    </svg>
+    <div className={`relative overflow-visible ${className}`} style={{ height: `${height}px`, width: `${width}px` }}>
+      <div className="font-bold" style={{ 
+        fontSize: `${height * 0.7}px`, 
+        color: 'white',
+        display: 'inline-block',
+        position: 'absolute',
+        left: `${height * 0.8}px`,
+        top: '50%',
+        transform: 'translateY(-50%)'
+      }}>
+        Skillbag
+      </div>
+      <div style={{ 
+        height: `${height}px`, 
+        width: `${height}px`, 
+        borderRadius: '50%', 
+        backgroundColor: 'white',
+        position: 'absolute',
+        left: 0,
+        top: '50%',
+        transform: 'translateY(-50%)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center'
+      }}>
+        <div style={{ 
+          height: `${height * 0.6}px`, 
+          width: `${height * 0.6}px`, 
+          borderRadius: '50%', 
+          border: `${height * 0.08}px solid #FF7F00`,
+          borderTopColor: 'transparent',
+          transform: 'rotate(45deg)'
+        }}></div>
+      </div>
+    </div>
   );
 };
