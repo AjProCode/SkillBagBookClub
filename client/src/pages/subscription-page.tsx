@@ -230,50 +230,65 @@ export default function SubscriptionPage() {
                         )}
                       </div>
                       
-                      {key === "quarterly" ? (
-                        <div className="space-y-4 mb-8">
-                          <div className="flex items-center p-3 rounded-lg hover:bg-secondary/10 transition-colors">
-                            <div className="bg-accent p-2 rounded-full">
-                              <BookOpen className="text-white h-5 w-5 flex-shrink-0" />
-                            </div>
-                            <span className="ml-3 font-medium">3 new books delivered monthly</span>
+                      <div className="space-y-4 mb-8">
+                        <div className="flex items-center p-3 rounded-lg hover:bg-secondary/10 transition-colors">
+                          <div className="bg-accent p-2 rounded-full">
+                            <BookOpen className="text-white h-5 w-5 flex-shrink-0" />
                           </div>
-                          <div className="flex items-center p-3 rounded-lg hover:bg-secondary/10 transition-colors">
-                            <div className="bg-accent p-2 rounded-full">
-                              <Target className="text-white h-5 w-5 flex-shrink-0" />
-                            </div>
-                            <span className="ml-3 font-medium">Personalized book selection</span>
-                          </div>
-                          <div className="flex items-center p-3 rounded-lg hover:bg-secondary/10 transition-colors">
-                            <div className="bg-accent p-2 rounded-full">
-                              <Users className="text-white h-5 w-5 flex-shrink-0" />
-                            </div>
-                            <span className="ml-3 font-medium">Dedicated book buddy</span>
-                          </div>
-                          <div className="flex items-center p-3 rounded-lg hover:bg-secondary/10 transition-colors">
-                            <div className="bg-accent p-2 rounded-full">
-                              <Truck className="text-white h-5 w-5 flex-shrink-0" />
-                            </div>
-                            <span className="ml-3 font-medium">Free pickup service</span>
-                          </div>
-                          <div className="flex items-center p-3 rounded-lg hover:bg-secondary/10 transition-colors">
-                            <div className="bg-accent p-2 rounded-full">
-                              <TrendingUp className="text-white h-5 w-5 flex-shrink-0" />
-                            </div>
-                            <span className="ml-3 font-medium">Reading progress tracking</span>
-                          </div>
+                          <span className="ml-3 font-medium">3 new books delivered monthly</span>
                         </div>
-                      ) : (
-                        <div className="p-6 mb-4 bg-secondary/5 rounded-lg text-center">
-                          <p className="text-gray-600">All premium features included</p>
-                          {key === "biannual" && (
-                            <p className="text-accent font-medium mt-2">+ Extended reading buddy support</p>
-                          )}
-                          {key === "annual" && (
-                            <p className="text-accent font-medium mt-2">+ Special welcome gift & priority book selection</p>
-                          )}
+                        <div className="flex items-center p-3 rounded-lg hover:bg-secondary/10 transition-colors">
+                          <div className="bg-accent p-2 rounded-full">
+                            <Target className="text-white h-5 w-5 flex-shrink-0" />
+                          </div>
+                          <span className="ml-3 font-medium">Personalized book selection</span>
                         </div>
-                      )}
+                        <div className="flex items-center p-3 rounded-lg hover:bg-secondary/10 transition-colors">
+                          <div className="bg-accent p-2 rounded-full">
+                            <Users className="text-white h-5 w-5 flex-shrink-0" />
+                          </div>
+                          <span className="ml-3 font-medium">Dedicated book buddy</span>
+                        </div>
+                        <div className="flex items-center p-3 rounded-lg hover:bg-secondary/10 transition-colors">
+                          <div className="bg-accent p-2 rounded-full">
+                            <Truck className="text-white h-5 w-5 flex-shrink-0" />
+                          </div>
+                          <span className="ml-3 font-medium">Free pickup service</span>
+                        </div>
+                        
+                        <div className="flex items-center p-3 rounded-lg hover:bg-secondary/10 transition-colors">
+                          <div className="bg-accent p-2 rounded-full">
+                            <TrendingUp className="text-white h-5 w-5 flex-shrink-0" />
+                          </div>
+                          <span className="ml-3 font-medium">Reading progress tracking</span>
+                        </div>
+                        
+                        {key === "biannual" && (
+                          <div className="flex items-center p-3 rounded-lg bg-secondary/10 transition-colors">
+                            <div className="bg-secondary p-2 rounded-full">
+                              <MessageSquare className="text-white h-5 w-5 flex-shrink-0" />
+                            </div>
+                            <span className="ml-3 font-medium text-secondary">Extended reading buddy support</span>
+                          </div>
+                        )}
+                        
+                        {key === "annual" && (
+                          <>
+                            <div className="flex items-center p-3 rounded-lg bg-secondary/10 transition-colors">
+                              <div className="bg-secondary p-2 rounded-full">
+                                <Gift className="text-white h-5 w-5 flex-shrink-0" />
+                              </div>
+                              <span className="ml-3 font-medium text-secondary">Welcome gift box</span>
+                            </div>
+                            <div className="flex items-center p-3 rounded-lg bg-secondary/10 transition-colors">
+                              <div className="bg-secondary p-2 rounded-full">
+                                <Award className="text-white h-5 w-5 flex-shrink-0" />
+                              </div>
+                              <span className="ml-3 font-medium text-secondary">Priority book selection</span>
+                            </div>
+                          </>
+                        )}
+                      </div>
                       
                       <Button 
                         className="w-full py-6 text-lg bg-secondary hover:bg-secondary/90 transition-colors"
