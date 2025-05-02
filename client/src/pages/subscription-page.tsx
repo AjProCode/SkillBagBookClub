@@ -271,6 +271,64 @@ export default function SubscriptionPage() {
               <p className="text-center text-gray-500 mt-6">
                 Join now and give your child the gift of a lifetime: the love of reading.
               </p>
+              
+              <div className="mt-12 pt-12 border-t border-gray-200">
+                <h3 className="font-heading font-bold text-xl text-center mb-8">Premium Features Comparison</h3>
+                
+                <div className="overflow-x-auto">
+                  <table className="w-full border-collapse">
+                    <thead>
+                      <tr className="bg-gray-100">
+                        <th className="px-4 py-3 text-left">Feature</th>
+                        <th className="px-4 py-3 text-center">Free</th>
+                        <th className="px-4 py-3 text-center bg-primary/5">Premium</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr className="border-b border-gray-200">
+                        <td className="px-4 py-3">Browse Book Library</td>
+                        <td className="px-4 py-3 text-center">Limited Preview</td>
+                        <td className="px-4 py-3 text-center bg-primary/5">Full Access</td>
+                      </tr>
+                      <tr className="border-b border-gray-200">
+                        <td className="px-4 py-3">Book Delivery</td>
+                        <td className="px-4 py-3 text-center">—</td>
+                        <td className="px-4 py-3 text-center bg-primary/5">3 Books Monthly</td>
+                      </tr>
+                      <tr className="border-b border-gray-200">
+                        <td className="px-4 py-3">Reading Progress Tracking</td>
+                        <td className="px-4 py-3 text-center">—</td>
+                        <td className="px-4 py-3 text-center bg-primary/5">Unlimited</td>
+                      </tr>
+                      <tr className="border-b border-gray-200">
+                        <td className="px-4 py-3">Reading Statistics</td>
+                        <td className="px-4 py-3 text-center">—</td>
+                        <td className="px-4 py-3 text-center bg-primary/5">Detailed</td>
+                      </tr>
+                      <tr className="border-b border-gray-200">
+                        <td className="px-4 py-3">Book Reviews</td>
+                        <td className="px-4 py-3 text-center">Limited Preview</td>
+                        <td className="px-4 py-3 text-center bg-primary/5">Full Access</td>
+                      </tr>
+                      <tr className="border-b border-gray-200">
+                        <td className="px-4 py-3">Post Book Reviews</td>
+                        <td className="px-4 py-3 text-center">—</td>
+                        <td className="px-4 py-3 text-center bg-primary/5">Unlimited</td>
+                      </tr>
+                      <tr className="border-b border-gray-200">
+                        <td className="px-4 py-3">Personal Book Buddy</td>
+                        <td className="px-4 py-3 text-center">—</td>
+                        <td className="px-4 py-3 text-center bg-primary/5">Included</td>
+                      </tr>
+                      <tr className="border-b border-gray-200">
+                        <td className="px-4 py-3">Reading Goals</td>
+                        <td className="px-4 py-3 text-center">—</td>
+                        <td className="px-4 py-3 text-center bg-primary/5">Personalized</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
             </div>
           </div>
         </div>
