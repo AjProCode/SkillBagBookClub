@@ -11,9 +11,10 @@ interface QuizResultsProps {
   results: QuizResultsType;
   recommendedBooks: Book[];
   onStartOver: () => void;
+  message?: string;
 }
 
-export function QuizResults({ results, recommendedBooks, onStartOver }: QuizResultsProps) {
+export function QuizResults({ results, recommendedBooks, onStartOver, message }: QuizResultsProps) {
   // Calculate top genres
   const topGenres = getTopGenres(results, 2);
   
@@ -52,15 +53,20 @@ export function QuizResults({ results, recommendedBooks, onStartOver }: QuizResu
           </div>
           
           <div>
-            <h3 className="text-lg font-medium mb-4">Your Book Recommendations</h3>
+            <h3 className="text-lg font-medium mb-2">Your Book Recommendations</h3>
+            
+            {message && (
+              <p className="text-sm text-muted-foreground mb-4">{message}</p>
+            )}
+            
             {recommendedBooks.length > 0 ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
                 {recommendedBooks.slice(0, 4).map((book) => (
                   <BookCard key={book.id} book={book} />
                 ))}
               </div>
             ) : (
-              <p className="text-muted-foreground">We couldn't find books matching your preferences right now.</p>
+              <p className="text-muted-foreground mt-4">We couldn't find books matching your preferences right now.</p>
             )}
           </div>
         </CardContent>

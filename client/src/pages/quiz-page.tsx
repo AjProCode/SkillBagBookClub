@@ -1,10 +1,17 @@
-import { useState, useEffect } from "react";
-import { quizQuestions, calculateResults, QuizResults as QuizResultsType } from "@/lib/quiz-data";
+import { useState } from "react";
+import { quizQuestions, calculateResults, QuizResults as QuizResultsType, getTopGenres } from "@/lib/quiz-data";
 import { QuizQuestion } from "@/components/ui/quiz-question";
 import { QuizResults } from "@/components/ui/quiz-results";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { Loader2 } from "lucide-react";
 import { Book } from "@shared/schema";
+import { apiRequest } from "@/lib/queryClient";
+
+type RecommendationResponse = {
+  recommendations: Book[];
+  isPreview?: boolean;
+  message: string;
+};
 
 export default function QuizPage() {
   // State to track current question index
@@ -18,10 +25,21 @@ export default function QuizPage() {
   
   // State to store quiz results
   const [results, setResults] = useState<QuizResultsType | null>(null);
+  
+  // State to store selected genres
+  const [selectedGenres, setSelectedGenres] = useState<string[]>([]);
 
-  // Fetch all books from the database
-  const { data: books, isLoading: isBooksLoading } = useQuery<Book[]>({
+  // Fetch all books from the database (fallback if API fails)
+  const { data: books } = useQuery<Book[]>({
     queryKey: ["/api/books"],
+  });
+
+  // Create a mutation for fetching recommendations
+  const recommendationsMutation = useMutation({
+    mutationFn: async (genres: string[]) => {
+      const res = await apiRequest("POST", "/api/book-recommendations", { genres });
+      return res.json() as Promise<RecommendationResponse>;
+    }
   });
 
   // Current question
@@ -40,9 +58,18 @@ export default function QuizPage() {
     if (currentQuestionIndex < quizQuestions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
     } else {
-      // Quiz completed
+      // Quiz completed - calculate results
       const quizResults = calculateResults(answers);
       setResults(quizResults);
+      
+      // Get top genres and request recommendations from the API
+      const topGenres = getTopGenres(quizResults, 2);
+      setSelectedGenres(topGenres);
+      
+      // Call the API to get book recommendations based on these genres
+      recommendationsMutation.mutate(topGenres);
+      
+      // Mark quiz as completed
       setQuizCompleted(true);
     }
   };
@@ -60,33 +87,34 @@ export default function QuizPage() {
     setAnswers({});
     setQuizCompleted(false);
     setResults(null);
+    setSelectedGenres([]);
+    recommendationsMutation.reset();
   };
 
-  // Find recommended books based on quiz results
+  // Get recommended books - either from API response or fallback to client-side filtering
   const getRecommendedBooks = (): Book[] => {
-    if (!results || !books || books.length === 0) return [];
-
-    // Convert results to array of [genre, score] pairs and sort by score
-    const genreScores = Object.entries(results) as [string, number][];
-    genreScores.sort((a, b) => b[1] - a[1]);
-
-    // Get top genres
-    const topGenres = genreScores.slice(0, 2).map(([genre]) => genre);
-
-    // Find books that match top genres
-    // For this example, we'll simply look for books with genre properties
-    // In a real app, you would have a more sophisticated matching algorithm
-    return books.filter(book => {
-      // Check if book matches any top genre
-      // This is just a simple example - replace with your actual book properties
-      return topGenres.some(genre => 
-        book.genre?.toLowerCase().includes(genre.toLowerCase()) || 
-        book.description?.toLowerCase().includes(genre.toLowerCase())
-      );
-    }).slice(0, 4); // Limit to 4 recommendations
+    // First priority: use the API response if available
+    if (recommendationsMutation.data?.recommendations) {
+      return recommendationsMutation.data.recommendations;
+    }
+    
+    // Second priority: client-side filtering if API failed
+    if (results && books && books.length > 0 && selectedGenres.length > 0) {
+      // Find books that match top genres
+      return books.filter(book => {
+        return selectedGenres.some(genre => 
+          (book.genre && book.genre.toLowerCase().includes(genre.toLowerCase())) ||
+          (book.description && book.description.toLowerCase().includes(genre.toLowerCase()))
+        );
+      }).slice(0, 4); // Limit to 4 recommendations
+    }
+    
+    // Fallback: return empty array if no data available
+    return [];
   };
 
-  if (isBooksLoading) {
+  // Show loading state while initially loading questions
+  if (!currentQuestion) {
     return (
       <div className="container max-w-6xl py-12 flex justify-center">
         <div className="flex flex-col items-center justify-center">
@@ -108,11 +136,22 @@ export default function QuizPage() {
 
       <div className="flex justify-center">
         {quizCompleted && results ? (
-          <QuizResults 
-            results={results} 
-            recommendedBooks={getRecommendedBooks()}
-            onStartOver={handleStartOver} 
-          />
+          recommendationsMutation.isPending ? (
+            <div className="flex flex-col items-center justify-center p-12">
+              <Loader2 className="h-10 w-10 animate-spin text-primary mb-4" />
+              <p className="text-lg">Finding your perfect book matches...</p>
+              <p className="text-sm text-muted-foreground mt-2">
+                We're analyzing your preferences to find the best books for you.
+              </p>
+            </div>
+          ) : (
+            <QuizResults 
+              results={results} 
+              recommendedBooks={getRecommendedBooks()}
+              onStartOver={handleStartOver}
+              message={recommendationsMutation.data?.message}
+            />
+          )
         ) : (
           <QuizQuestion
             question={currentQuestion}

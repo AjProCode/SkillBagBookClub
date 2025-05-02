@@ -276,6 +276,78 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  // Book recommendations API based on quiz results
+  app.post("/api/book-recommendations", requireAuth, async (req, res) => {
+    try {
+      const { genres } = req.body;
+      
+      if (!genres || !Array.isArray(genres) || genres.length === 0) {
+        return res.status(400).json({ message: "Please provide at least one genre preference" });
+      }
+      
+      // Get all books
+      const allBooks = await storage.getAllBooks();
+      
+      // Filter books based on genre preferences
+      // This is a simple implementation - in a real app, you would have a more sophisticated algorithm
+      const recommendedBooks = allBooks.filter(book => {
+        // Check if any of the preferred genres match with the book's genre or is mentioned in the description
+        return genres.some(genre => {
+          const genreLower = genre.toLowerCase();
+          return (
+            (book.genre && book.genre.toLowerCase().includes(genreLower)) || 
+            (book.description && book.description.toLowerCase().includes(genreLower))
+          );
+        });
+      });
+      
+      // Limit to 4 recommendations
+      const limitedRecommendations = recommendedBooks.slice(0, 4);
+      
+      // If no recommendations found, return some default popular books
+      if (limitedRecommendations.length === 0) {
+        // Sort by rating or popularity and return top books
+        const defaultRecommendations = [...allBooks]
+          .sort((a, b) => (b.rating || 0) - (a.rating || 0))
+          .slice(0, 4);
+        
+        return res.json({
+          recommendations: defaultRecommendations,
+          message: "We couldn't find exact matches for your preferences, but here are some popular books you might enjoy!"
+        });
+      }
+      
+      // For non-subscribers, limit the information returned
+      if (!req.user?.subscription) {
+        const previewRecommendations = limitedRecommendations.map(book => ({
+          id: book.id,
+          title: book.title,
+          author: book.author,
+          coverImage: book.coverImage,
+          isPreview: true,
+          previewDescription: book.description 
+            ? book.description.substring(0, 100) + "... (Subscribe to read more)"
+            : "Subscribe to access full book details."
+        }));
+        
+        return res.json({
+          recommendations: previewRecommendations,
+          isPreview: true,
+          message: "Subscribe to unlock full access to these recommended books and many more!"
+        });
+      }
+      
+      // Return full recommendations for subscribers
+      res.json({
+        recommendations: limitedRecommendations,
+        message: "Here are some books tailored to your preferences!"
+      });
+    } catch (error) {
+      console.error("Error generating book recommendations:", error);
+      res.status(500).json({ message: "Failed to generate book recommendations" });
+    }
+  });
+  
   // Admin API endpoints - Admin Only
   // Get all users
   app.get("/api/users", requireAdmin, async (req, res) => {
