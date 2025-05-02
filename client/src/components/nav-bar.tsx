@@ -40,8 +40,9 @@ export default function NavBar() {
     <header className="bg-white shadow-md">
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         <div className="flex items-center">
-          <SkillbagLogo width={48} height={48} />
-          <h1 className="ml-3 font-heading font-bold text-2xl text-primary">Skillbag</h1>
+          <div className="flex items-center">
+            <SkillbagLogo width={160} height={40} />
+          </div>
         </div>
         
         {!isMobile && (

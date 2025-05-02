@@ -99,8 +99,7 @@ export default function HomePage() {
           <div className="flex flex-col md:flex-row justify-between">
             <div className="mb-6 md:mb-0">
               <div className="flex items-center">
-                <SkillbagLogo width={48} height={48} />
-                <h2 className="ml-3 font-heading font-bold text-xl">Skillbag</h2>
+                <SkillbagLogo width={160} height={40} isWhite={true} />
               </div>
               <p className="mt-3 text-white/80 max-w-xs">
                 Helping young readers develop a lifelong reading habit through engaging books and digital features!
