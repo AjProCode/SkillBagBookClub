@@ -13,41 +13,46 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
     
-    --primary: 262 100% 66%;
-    --primary-foreground: 210 40% 98%;
+    /* Purple from Skillbag logo */
+    --primary: 280 85% 45%;
+    --primary-foreground: 0 0% 100%;
     
-    --secondary: 25 100% 65%;
-    --secondary-foreground: 222 47% 11%;
+    /* Green from Skillbag logo */
+    --secondary: 140 60% 40%;
+    --secondary-foreground: 0 0% 100%;
     
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
     
-    --accent: 194 100% 50%;
-    --accent-foreground: 222 47% 11%;
+    /* Lighter purple for accents */
+    --accent: 280 85% 55%;
+    --accent-foreground: 0 0% 100%;
     
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
     
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 222 47% 11%;
+    --ring: 280 85% 45%;
     
     --radius: 0.5rem;
 
-    --chart-1: 262 100% 66%;
-    --chart-2: 25 100% 65%;
-    --chart-3: 194 100% 50%;
-    --chart-4: 142 72% 42%;
-    --chart-5: 0 84% 60%;
+    /* Chart colors based on Skillbag theme */
+    --chart-1: 280 85% 45%;
+    --chart-2: 140 60% 40%;
+    --chart-3: 280 85% 65%;
+    --chart-4: 140 60% 60%;
+    --chart-5: 260 85% 55%;
 
+    /* Sidebar styling */
     --sidebar-background: 0 0% 100%;
     --sidebar-foreground: 222 47% 11%;
-    --sidebar-primary: 262 100% 66%;
-    --sidebar-primary-foreground: 210 40% 98%;
-    --sidebar-accent: 262 100% 66%;
-    --sidebar-accent-foreground: 210 40% 98%;
+    --sidebar-primary: 280 85% 45%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 140 60% 40%;
+    --sidebar-accent-foreground: 0 0% 100%;
     --sidebar-border: 214.3 31.8% 91.4%;
-    --sidebar-ring: 222 47% 11%;
+    --sidebar-ring: 280 85% 45%;
   }
   
   .dark {
@@ -60,24 +65,27 @@
     --popover: 224 71% 4%;
     --popover-foreground: 210 40% 98%;
     
-    --primary: 262 100% 66%;
-    --primary-foreground: 210 40% 98%;
+    /* Brighter purple for dark mode */
+    --primary: 280 85% 55%;
+    --primary-foreground: 0 0% 100%;
     
-    --secondary: 25 100% 65%;
-    --secondary-foreground: 210 40% 98%;
+    /* Brighter green for dark mode */
+    --secondary: 140 70% 40%;
+    --secondary-foreground: 0 0% 100%;
     
     --muted: 215 27.9% 16.9%;
     --muted-foreground: 217.9 10.6% 64.9%;
     
-    --accent: 194 100% 50%;
-    --accent-foreground: 210 40% 98%;
+    /* Lighter purple accent for dark mode */
+    --accent: 280 85% 65%;
+    --accent-foreground: 0 0% 100%;
     
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
     
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    --ring: 280 85% 65%;
   }
 
   * {
@@ -116,6 +124,6 @@
 
   .card-hover:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 25px -5px rgba(140, 82, 255, 0.3);
+    box-shadow: 0 10px 25px -5px rgba(128, 20, 180, 0.3);
   }
 }

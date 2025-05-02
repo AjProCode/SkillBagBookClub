@@ -40,11 +40,11 @@ export default function NavBar() {
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         <div className="flex items-center">
           <img 
-            src="https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-1.2.1&auto=format&fit=crop&w=50&h=50&q=80" 
-            alt="BookBuddy Logo" 
-            className="h-10 w-10 rounded-full" 
+            src="/images/skillbag-logo.svg" 
+            alt="Skillbag Logo" 
+            className="h-12 w-12" 
           />
-          <h1 className="ml-3 font-heading font-bold text-2xl text-primary">BookBuddy</h1>
+          <h1 className="ml-3 font-heading font-bold text-2xl text-primary">Skillbag</h1>
         </div>
         
         {!isMobile && (
