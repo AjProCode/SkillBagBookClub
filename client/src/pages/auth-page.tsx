@@ -99,7 +99,7 @@ export default function AuthPage() {
             <div className="mb-8">
               <div className="flex items-center mb-2">
                 <div>
-                  <SkillbagLogo width={180} height={60} />
+                  <SkillbagLogo width={220} height={60} />
                 </div>
               </div>
               <p className="text-gray-600">Join our community of young readers!</p>

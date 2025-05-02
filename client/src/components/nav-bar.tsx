@@ -42,11 +42,7 @@ export default function NavBar() {
         <div className="flex items-center">
           <div className="flex items-center">
             <Link href="/" className="flex items-center">
-              <img 
-                src="/logo/skillbag-logo.jpeg"
-                alt="Skillbag Logo"
-                className="h-12"
-              />
+              <SkillbagLogo height={50} width={200} />
             </Link>
           </div>
         </div>
