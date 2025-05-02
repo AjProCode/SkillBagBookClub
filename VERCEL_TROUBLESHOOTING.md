@@ -2,13 +2,73 @@
 
 If you're experiencing 404 NOT_FOUND errors or other issues with your Vercel deployment, follow this step-by-step troubleshooting guide.
 
-## Common Issues and Solutions
+## Critical Fix for 404 Error (bom1::n5sv8-XXXXXXX)
 
-### 1. 404 NOT_FOUND Error
+If you're seeing a 404 error with an ID like `bom1::n5sv8-1746192916070-3ae8d2b58061`, the issue is specifically related to how Vercel is handling your server-side JavaScript and API routes. We've created several specific fixes:
 
-If you're seeing a 404 error with an ID like `bom1::n5sv8-1746192916070-3ae8d2b58061`:
+### 1. Updated vercel.json
 
-#### Check Environment Variables
+We've updated the `vercel.json` file to use Vercel's newer configuration format:
+
+```json
+{
+  "version": 2,
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "installCommand": "npm install",
+  "framework": "vite",
+  "functions": {
+    "api/*.js": {
+      "memory": 1024,
+      "maxDuration": 10
+    }
+  },
+  "rewrites": [
+    { "source": "/api/(.*)", "destination": "/api/index.js" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ],
+  "env": {
+    "NODE_ENV": "production"
+  }
+}
+```
+
+### 2. Created Vercel Serverless Function
+
+We've added a dedicated API file at `api/index.js` to handle Vercel's serverless function approach:
+
+```javascript
+// api/index.js - Vercel serverless function
+import express from 'express';
+import { registerRoutes } from '../server/routes.js';
+
+// Create Express app
+const app = express();
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+// Basic logging middleware
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.path}`);
+  next();
+});
+
+// Setup all routes
+registerRoutes(app);
+
+// Error handler
+app.use((err, _req, res, _next) => {
+  console.error('Server error:', err);
+  const status = err.status || err.statusCode || 500;
+  const message = err.message || "Internal Server Error";
+  res.status(status).json({ message });
+});
+
+// Export for Vercel
+export default app;
+```
+
+## Environment Variables
 
 Make sure these essential environment variables are set in your Vercel project settings:
 
