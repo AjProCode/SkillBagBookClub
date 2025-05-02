@@ -41,11 +41,13 @@ export default function NavBar() {
       <div className="container mx-auto px-4 py-3 flex justify-between items-center">
         <div className="flex items-center">
           <div className="flex items-center">
-            <img 
-              src="/images/skillbag-logo-original.png" 
-              alt="Skillbag Logo" 
-              className="h-12 w-auto"
-            />
+            <Link href="/" className="flex items-center">
+              <div className="flex items-center">
+                <span className="text-[#FF7F00] font-bold text-3xl mr-1">S</span>
+                <span className="text-[#1A237E] font-bold text-2xl">killbag</span>
+                <span className="ml-1 text-xs bg-primary text-white px-2 py-0.5 rounded-full font-semibold">Books</span>
+              </div>
+            </Link>
           </div>
         </div>
         

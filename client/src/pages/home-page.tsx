@@ -99,11 +99,11 @@ export default function HomePage() {
           <div className="flex flex-col md:flex-row justify-between">
             <div className="mb-6 md:mb-0">
               <div className="flex items-center">
-                <img 
-                  src="/images/skillbag-logo-original.png" 
-                  alt="Skillbag Logo" 
-                  className="h-12 w-auto brightness-0 invert" 
-                />
+                <div className="flex items-center">
+                  <span className="font-bold text-3xl mr-1 text-white">S</span>
+                  <span className="text-white font-bold text-2xl">killbag</span>
+                  <span className="ml-1 text-xs bg-white text-primary px-2 py-0.5 rounded-full font-semibold">Books</span>
+                </div>
               </div>
               <p className="mt-3 text-white/80 max-w-xs">
                 Helping young readers develop a lifelong reading habit through engaging books and digital features!
