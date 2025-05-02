@@ -7,7 +7,26 @@
   command = "npm run dev"
   port = 5000
 
+# API routes handled by Netlify Functions
+[[redirects]]
+  from = "/api/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200
+
+# Health check endpoint
+[[redirects]]
+  from = "/health"
+  to = "/.netlify/functions/health"
+  status = 200
+
+# Database test endpoint
+[[redirects]]
+  from = "/db-test"
+  to = "/.netlify/functions/db-test"
+  status = 200
+
+# All other routes handled by the SPA
 [[redirects]]
   from = "/*"
-  to = "/"
+  to = "/index.html"
   status = 200

@@ -3,8 +3,8 @@ services:
     name: skillbag-book-club
     env: node
     buildCommand: npm run build
-    startCommand: npm start
-    healthCheckPath: /
+    startCommand: node dist/server/index.js
+    healthCheckPath: /api
     envVars:
       - key: NODE_ENV
         value: production
@@ -14,3 +14,13 @@ services:
         sync: false
       - key: SESSION_SECRET
         generateValue: true
+      
+    # Automatically deploy when code is pushed to the main branch
+    autoDeploy: true
+    
+    # Scale up or down based on traffic
+    scaling:
+      minInstances: 1
+      maxInstances: 3
+      targetMemoryPercent: 80
+      targetCPUPercent: 80
