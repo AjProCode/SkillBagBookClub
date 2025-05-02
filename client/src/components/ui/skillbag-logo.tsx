@@ -11,7 +11,7 @@ export function SkillbagLogo({ width = 200, height = 60, className = '', isWhite
   return (
     <div className={className} style={{ width: width, height: height }}>
       <img 
-        src="/assets/skillbag-logo.jpeg"
+        src="/assets/skillbag-logo.png"
         alt="Skillbag Logo"
         width={width}
         height={height}
