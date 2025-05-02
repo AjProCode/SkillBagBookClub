@@ -1,16 +1,33 @@
 import type { Express } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { setupAuth, requireAuth } from "./auth";
+import { setupAuth, requireAuth, requireSubscription } from "./auth";
 
 export async function registerRoutes(app: Express): Promise<Server> {
   // Setup authentication routes
   setupAuth(app);
 
-  // Books API
-  app.get("/api/books", async (req, res) => {
+  // Books API - Restricted for subscribers for full content
+  app.get("/api/books", requireAuth, async (req, res) => {
     try {
       const books = await storage.getAllBooks();
+      
+      // If user is not subscribed, just return limited preview data
+      if (!req.user.subscription) {
+        const limitedBooks = books.map(book => ({
+          id: book.id,
+          title: book.title,
+          author: book.author,
+          coverImage: book.coverImage,
+          isPreview: true,
+          previewDescription: book.description 
+            ? book.description.substring(0, 100) + "... (Subscribe to read more)"
+            : "Subscribe to access full book details."
+        }));
+        return res.json(limitedBooks);
+      }
+      
+      // For subscribers, return full data
       res.json(books);
     } catch (error) {
       console.error("Error fetching books:", error);
@@ -18,12 +35,28 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.get("/api/books/:id", async (req, res) => {
+  app.get("/api/books/:id", requireAuth, async (req, res) => {
     try {
       const book = await storage.getBookById(parseInt(req.params.id));
       if (!book) {
         return res.status(404).json({ message: "Book not found" });
       }
+      
+      // If user is not subscribed, just return limited preview data
+      if (!req.user.subscription) {
+        return res.json({
+          id: book.id,
+          title: book.title,
+          author: book.author,
+          coverImage: book.coverImage,
+          isPreview: true,
+          previewDescription: book.description 
+            ? book.description.substring(0, 100) + "... (Subscribe to read more)"
+            : "Subscribe to access full book details."
+        });
+      }
+      
+      // For subscribers, return full data
       res.json(book);
     } catch (error) {
       console.error("Error fetching book:", error);
@@ -31,8 +64,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // User's books (reading list) API
-  app.get("/api/my-books", requireAuth, async (req, res) => {
+  // User's books (reading list) API - Subscribers Only
+  app.get("/api/my-books", requireSubscription, async (req, res) => {
     try {
       const userBooks = await storage.getUserBooks(req.user!.id);
       res.json(userBooks);
@@ -42,7 +75,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.post("/api/my-books", requireAuth, async (req, res) => {
+  app.post("/api/my-books", requireSubscription, async (req, res) => {
     try {
       const { bookId } = req.body;
       if (!bookId) {
@@ -62,7 +95,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.patch("/api/my-books/progress", requireAuth, async (req, res) => {
+  app.patch("/api/my-books/progress", requireSubscription, async (req, res) => {
     try {
       const { bookId, progress } = req.body;
       if (!bookId || progress === undefined) {
@@ -81,8 +114,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Reading stats API
-  app.get("/api/reading-stats", requireAuth, async (req, res) => {
+  // Reading stats API - Subscribers Only
+  app.get("/api/reading-stats", requireSubscription, async (req, res) => {
     try {
       const stats = await storage.getReadingStats(req.user!.id);
       res.json(stats);
@@ -93,9 +126,26 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   // Reviews API
-  app.get("/api/reviews", async (req, res) => {
+  app.get("/api/reviews", requireAuth, async (req, res) => {
     try {
       const reviews = await storage.getAllReviews();
+      
+      // If user is not subscribed, just return limited data
+      if (!req.user.subscription) {
+        const limitedReviews = reviews
+          .slice(0, 2) // Only return 2 reviews for non-subscribers
+          .map(review => ({
+            id: review.id,
+            rating: review.rating,
+            review: review.review.substring(0, 50) + "... (Subscribe to see full reviews)",
+            bookId: review.bookId,
+            userId: review.userId,
+            isPreview: true,
+          }));
+        return res.json(limitedReviews);
+      }
+      
+      // For subscribers, return all reviews
       res.json(reviews);
     } catch (error) {
       console.error("Error fetching reviews:", error);
@@ -103,7 +153,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.post("/api/reviews", requireAuth, async (req, res) => {
+  app.post("/api/reviews", requireSubscription, async (req, res) => {
     try {
       const { bookId, rating, review, favoriteCharacter } = req.body;
       if (!bookId || !rating || !review) {

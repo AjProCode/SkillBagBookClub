@@ -123,3 +123,18 @@ export function requireAuth(req: Express.Request, res: Express.Response, next: E
   }
   next();
 }
+
+export function requireSubscription(req: Express.Request, res: Express.Response, next: Express.NextFunction) {
+  if (!req.isAuthenticated()) {
+    return res.status(401).json({ message: "Unauthorized" });
+  }
+  
+  if (!req.user.subscription) {
+    return res.status(403).json({ 
+      message: "Subscription required", 
+      code: "SUBSCRIPTION_REQUIRED" 
+    });
+  }
+  
+  next();
+}
