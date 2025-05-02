@@ -124,6 +124,51 @@ export async function registerRoutes(app: Express): Promise<Server> {
       res.status(500).json({ message: "Failed to fetch reading statistics" });
     }
   });
+  
+  // Reading activity API - Subscribers Only
+  app.get("/api/reading-activities/:bookId", requireSubscription, async (req, res) => {
+    try {
+      const bookId = parseInt(req.params.bookId);
+      if (isNaN(bookId)) {
+        return res.status(400).json({ message: "Invalid book ID" });
+      }
+      
+      const activities = await storage.getReadingActivitiesForBook(req.user!.id, bookId);
+      res.json(activities);
+    } catch (error) {
+      console.error("Error fetching reading activities:", error);
+      res.status(500).json({ message: "Failed to fetch reading activities" });
+    }
+  });
+  
+  app.post("/api/reading-activities", requireSubscription, async (req, res) => {
+    try {
+      const { bookId, minutes, date, notes } = req.body;
+      
+      if (!bookId || !minutes || !date) {
+        return res.status(400).json({ message: "Book ID, minutes, and date are required" });
+      }
+      
+      // Validate that user has this book in their reading list
+      const userBook = await storage.getUserBookByBookId(req.user!.id, parseInt(bookId));
+      if (!userBook) {
+        return res.status(400).json({ message: "Book not found in your reading list" });
+      }
+      
+      const activity = await storage.createReadingActivity(
+        req.user!.id,
+        parseInt(bookId),
+        parseInt(minutes),
+        new Date(date),
+        notes
+      );
+      
+      res.status(201).json(activity);
+    } catch (error) {
+      console.error("Error creating reading activity:", error);
+      res.status(500).json({ message: "Failed to log reading activity" });
+    }
+  });
 
   // Reviews API
   app.get("/api/reviews", requireAuth, async (req, res) => {

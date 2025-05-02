@@ -209,6 +209,44 @@ class DatabaseStorage implements IStorage {
       book: book!,
     };
   }
+  
+  // Reading activity methods
+  async createReadingActivity(
+    userId: number, 
+    bookId: number, 
+    minutes: number, 
+    date: Date,
+    notes?: string
+  ): Promise<schema.ReadingActivity> {
+    const [activity] = await db
+      .insert(schema.readingActivities)
+      .values({
+        userId,
+        bookId,
+        minutes,
+        date,
+        notes,
+        createdAt: new Date(),
+      })
+      .returning();
+    
+    return activity;
+  }
+  
+  async getReadingActivitiesForBook(userId: number, bookId: number): Promise<schema.ReadingActivity[]> {
+    const activities = await db
+      .select()
+      .from(schema.readingActivities)
+      .where(
+        and(
+          eq(schema.readingActivities.userId, userId),
+          eq(schema.readingActivities.bookId, bookId)
+        )
+      )
+      .orderBy(schema.readingActivities.date);
+    
+    return activities;
+  }
 
   // Reading stats
   async getReadingStats(userId: number): Promise<{

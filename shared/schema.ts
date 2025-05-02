@@ -63,6 +63,7 @@ export const readingActivities = pgTable("reading_activities", {
   bookId: integer("book_id").references(() => books.id).notNull(),
   date: date("date").notNull(),
   minutes: integer("minutes").notNull(), // Minutes spent reading
+  notes: text("notes"), // Optional notes about the reading session
   createdAt: timestamp("created_at").defaultNow().notNull(),
 });
 

@@ -17,6 +17,8 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { UserBook } from "@shared/schema";
 import { BookOpen, Clock, CalendarDays, MessageSquare } from "lucide-react";
 import { format } from "date-fns";
+import { apiRequest } from "@/lib/queryClient";
+import { useToast } from "@/hooks/use-toast";
 
 interface ReadingProgressProps {
   userBook: UserBook;
@@ -43,15 +45,45 @@ export default function ReadingProgress({ userBook, onUpdateProgress }: ReadingP
     setDialogOpen(false);
   };
   
-  const handleAddReadingLog = () => {
-    // Calculate new progress percentage based on pages read
-    const newProgress = Math.min(100, Math.round((pagesRead2 / totalPages) * 100));
-    onUpdateProgress(newProgress);
-    setProgressValue(newProgress);
-    setDialogOpen(false);
-    
-    // In a real app, we would save the reading log entry with minutes read, date and notes
-    // to a separate table in the database
+  const { toast } = useToast();
+  
+  const handleAddReadingLog = async () => {
+    try {
+      // Calculate new progress percentage based on pages read
+      const newProgress = Math.min(100, Math.round((pagesRead2 / totalPages) * 100));
+      
+      // First, update the progress on the book
+      onUpdateProgress(newProgress);
+      setProgressValue(newProgress);
+      
+      // Then log the reading activity
+      const response = await apiRequest('POST', '/api/reading-activities', {
+        bookId: userBook.bookId.toString(),
+        minutes: minutesRead,
+        date: logDate,
+        notes: notes || undefined
+      });
+      
+      // Close the dialog on success
+      setDialogOpen(false);
+      // Reset form values
+      setMinutesRead(15);
+      setNotes('');
+      setPagesRead2(Math.round(newProgress / 100 * totalPages));
+      
+      toast({
+        title: "Reading log saved",
+        description: "Your reading activity has been recorded successfully!",
+      });
+      
+    } catch (error: any) {
+      console.error('Error saving reading log:', error);
+      toast({
+        title: "Error saving reading log",
+        description: error?.message || "Failed to save your reading log. Please try again.",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
