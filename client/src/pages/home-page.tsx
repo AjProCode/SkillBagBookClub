@@ -26,35 +26,35 @@ export default function HomePage() {
       <NavBar />
       
       {/* Hero Section */}
-      <section className="bg-secondary text-white py-12 md:py-20">
+      <section className="bg-secondary/5 py-12 md:py-20">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row items-center">
             <div className="md:w-1/2 mb-8 md:mb-0">
-              <h1 className="font-heading font-bold text-3xl md:text-4xl lg:text-5xl mb-4">
+              <h1 className="font-heading font-bold text-3xl md:text-4xl lg:text-5xl mb-4 text-secondary">
                 Develop a Lifelong Reading Habit!
               </h1>
-              <p className="text-lg md:text-xl mb-6 opacity-90">
+              <p className="text-lg md:text-xl mb-6 text-gray-700">
                 Receive 3 carefully selected books monthly and track your reading progress with our digital tools.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button asChild size="lg" className="bg-primary hover:bg-primary/90 text-white font-heading font-semibold py-3 px-6 rounded-xl">
                   <Link href="/subscription">Subscribe Now</Link>
                 </Button>
-                <Button asChild variant="outline" size="lg" className="bg-transparent border-white text-white hover:bg-white/10 font-heading font-semibold py-3 px-6 rounded-xl">
+                <Button asChild variant="outline" size="lg" className="bg-transparent border-secondary text-secondary hover:bg-secondary/5 font-heading font-semibold py-3 px-6 rounded-xl">
                   <Link href="/library">Explore Library</Link>
                 </Button>
               </div>
-              <div className="mt-6 bg-white/10 backdrop-blur-sm rounded-xl p-4 border border-white/20">
+              <div className="mt-6 bg-accent/5 rounded-xl p-4 border border-accent/20">
                 <div className="flex items-center">
-                  <div className="bg-accent text-white p-2 rounded-lg">
-                    <Star className="h-5 w-5" />
+                  <div className="bg-accent/10 p-2 rounded-lg">
+                    <Star className="h-5 w-5 text-accent" />
                   </div>
-                  <p className="ml-3 font-medium">Special Offer: ₹3000 for 3 months subscription - Save ₹597!</p>
+                  <p className="ml-3 font-medium text-gray-700">Special Offer: ₹3000 for 3 months subscription - Save ₹597!</p>
                 </div>
               </div>
             </div>
             <div className="md:w-1/2 flex justify-center">
-              <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&h=500&q=80" 
+              <img src="https://images.unsplash.com/photo-1551029506-0807df4e2031?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=500&q=80" 
                 alt="Children reading books" 
                 className="rounded-2xl shadow-lg max-w-full h-auto" 
                 style={{ maxHeight: "400px" }} />
@@ -147,13 +147,16 @@ export default function HomePage() {
                             <p className="text-xs text-gray-500">
                               by {userBook.book.author}
                             </p>
+                            <div className="flex justify-between mt-1 text-xs text-gray-600">
+                              <span>Pages read:</span>
+                              <span className="font-medium">{Math.round(userBook.progress * 3)} of 300</span>
+                            </div>
                             <div className="mt-1 bg-gray-200 h-2 rounded-full">
                               <div 
                                 className="bg-primary h-2 rounded-full"
                                 style={{ width: `${userBook.progress}%` }}
                               />
                             </div>
-                            <p className="mt-1 text-xs text-gray-600">{userBook.progress}% complete</p>
                           </div>
                           <Button variant="ghost" size="sm" asChild className="flex-shrink-0">
                             <Link href="/my-books">
@@ -224,60 +227,60 @@ export default function HomePage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-secondary text-white py-8 mt-auto">
+      <footer className="bg-secondary/5 py-8 mt-auto border-t border-secondary/10">
         <div className="container mx-auto px-4">
           <div className="flex flex-col md:flex-row justify-between">
             <div className="mb-6 md:mb-0">
               <div className="flex items-center">
-                <SkillbagLogo width={180} height={40} isWhite={true} />
+                <SkillbagLogo width={180} height={40} isWhite={false} />
               </div>
-              <p className="mt-3 text-white/80 max-w-xs">
+              <p className="mt-3 text-gray-600 max-w-xs">
                 Helping young readers develop a lifelong reading habit through engaging books and digital features!
               </p>
             </div>
             
             <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
               <div>
-                <h3 className="font-heading font-semibold mb-3">Explore</h3>
+                <h3 className="font-heading font-semibold mb-3 text-secondary">Explore</h3>
                 <ul className="space-y-2">
-                  <li><Link href="/library" className="text-white/80 hover:text-white transition">Library</Link></li>
-                  <li><Link href="/reviews" className="text-white/80 hover:text-white transition">Reviews</Link></li>
-                  <li><Link href="/my-books" className="text-white/80 hover:text-white transition">Reading Tracker</Link></li>
+                  <li><Link href="/library" className="text-gray-600 hover:text-secondary transition">Library</Link></li>
+                  <li><Link href="/reviews" className="text-gray-600 hover:text-secondary transition">Reviews</Link></li>
+                  <li><Link href="/my-books" className="text-gray-600 hover:text-secondary transition">Reading Tracker</Link></li>
                 </ul>
               </div>
               
               <div>
-                <h3 className="font-heading font-semibold mb-3">Account</h3>
+                <h3 className="font-heading font-semibold mb-3 text-secondary">Account</h3>
                 <ul className="space-y-2">
-                  <li><Link href="/auth" className="text-white/80 hover:text-white transition">Sign Up</Link></li>
-                  <li><Link href="/auth" className="text-white/80 hover:text-white transition">Login</Link></li>
+                  <li><Link href="/auth" className="text-gray-600 hover:text-secondary transition">Sign Up</Link></li>
+                  <li><Link href="/auth" className="text-gray-600 hover:text-secondary transition">Login</Link></li>
                 </ul>
               </div>
               
               <div>
-                <h3 className="font-heading font-semibold mb-3">Parents</h3>
+                <h3 className="font-heading font-semibold mb-3 text-secondary">Parents</h3>
                 <ul className="space-y-2">
-                  <li><a href="#" className="text-white/80 hover:text-white transition">Safety Guidelines</a></li>
-                  <li><a href="#" className="text-white/80 hover:text-white transition">Privacy Controls</a></li>
+                  <li><a href="#" className="text-gray-600 hover:text-secondary transition">Safety Guidelines</a></li>
+                  <li><a href="#" className="text-gray-600 hover:text-secondary transition">Privacy Controls</a></li>
                 </ul>
               </div>
             </div>
           </div>
           
-          <div className="mt-8 pt-6 border-t border-white/20 flex flex-col md:flex-row justify-between items-center">
-            <p className="text-white/80 text-sm">© 2025 Skillbag Book Club. All rights reserved.</p>
+          <div className="mt-8 pt-6 border-t border-secondary/10 flex flex-col md:flex-row justify-between items-center">
+            <p className="text-gray-500 text-sm">© 2025 Skillbag Book Club. All rights reserved.</p>
             <div className="mt-4 md:mt-0 flex space-x-4">
-              <a href="#" className="text-white/80 hover:text-white transition">
+              <a href="#" className="text-gray-500 hover:text-secondary transition">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 2C6.477 2 2 6.477 2 12c0 5.523 4.477 10 10 10s10-4.477 10-10c0-5.523-4.477-10-10-10zm0 19c-4.97 0-9-4.03-9-9s4.03-9 9-9 9 4.03 9 9-4.03 9-9 9zm-5-5.5c0-.276.224-.5.5-.5h9c.276 0 .5.224.5.5s-.224.5-.5.5h-9c-.276 0-.5-.224-.5-.5zm0-4c0-.276.224-.5.5-.5h9c.276 0 .5.224.5.5s-.224.5-.5.5h-9c-.276 0-.5-.224-.5-.5zm0-4c0-.276.224-.5.5-.5h9c.276 0 .5.224.5.5s-.224.5-.5.5h-9c-.276 0-.5-.224-.5-.5z"/>
                 </svg>
               </a>
-              <a href="#" className="text-white/80 hover:text-white transition">
+              <a href="#" className="text-gray-500 hover:text-secondary transition">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 2C6.477 2 2 6.477 2 12c0 5.523 4.477 10 10 10s10-4.477 10-10c0-5.523-4.477-10-10-10zm0 18c-4.418 0-8-3.582-8-8s3.582-8 8-8 8 3.582 8 8-3.582 8-8 8zm-5-9h10v2H7v-2z"/>
                 </svg>
               </a>
-              <a href="#" className="text-white/80 hover:text-white transition">
+              <a href="#" className="text-gray-500 hover:text-secondary transition">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 2C6.477 2 2 6.477 2 12c0 5.523 4.477 10 10 10s10-4.477 10-10c0-5.523-4.477-10-10-10zm0 18c-4.418 0-8-3.582-8-8s3.582-8 8-8 8 3.582 8 8-3.582 8-8 8zm-5-8h4V8h2v4h4v2h-4v4h-2v-4H7v-2z"/>
                 </svg>

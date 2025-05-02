@@ -28,48 +28,22 @@ interface Plan {
 export default function SubscriptionPage() {
   const { user } = useAuth();
   const { toast } = useToast();
-  const [selectedPlan, setSelectedPlan] = useState<PlanType>("quarterly");
+  // Only premium plan is available
 
-  const plans: Record<PlanType, Plan> = {
-    monthly: {
-      id: "monthly_plan",
-      name: "Monthly",
-      price: 1199,
-      period: "month",
-    },
-    quarterly: {
-      id: "quarterly_plan",
-      name: "3 Months",
-      price: 3000,
-      originalPrice: 3597,
-      period: "3 months",
-      recommended: true,
-      discount: "SAVE ₹597",
-    },
-    biannual: {
-      id: "biannual_plan",
-      name: "6 Months",
-      price: 5500,
-      originalPrice: 7194,
-      period: "6 months",
-      discount: "SAVE ₹1694",
-    },
-    annual: {
-      id: "annual_plan",
-      name: "Annual",
-      price: 10000,
-      originalPrice: 14388,
-      period: "year",
-      discount: "SAVE ₹4388",
-    },
+  const premiumPlan = {
+    id: "premium_plan",
+    name: "Premium",
+    price: 3000,
+    originalPrice: 3597,
+    period: "3 months",
+    discount: "SAVE ₹597",
   };
 
   const subscribeMutation = useMutation({
     mutationFn: async () => {
-      const plan = plans[selectedPlan];
       const res = await apiRequest("POST", "/api/subscribe", {
-        planId: plan.id,
-        price: plan.price,
+        planId: premiumPlan.id,
+        price: premiumPlan.price,
       });
       return await res.json();
     },
