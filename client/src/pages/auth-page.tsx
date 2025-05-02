@@ -98,11 +98,11 @@ export default function AuthPage() {
             <div className="mb-8">
               <div className="flex items-center mb-2">
                 <img 
-                  src="https://images.unsplash.com/photo-1589998059171-988d887df646?ixlib=rb-1.2.1&auto=format&fit=crop&w=50&h=50&q=80" 
-                  alt="BookBuddy Logo" 
-                  className="h-10 w-10 rounded-full mr-3" 
+                  src="/images/skillbag-logo.svg" 
+                  alt="Skillbag Logo" 
+                  className="h-12 w-12 mr-3" 
                 />
-                <h1 className="font-heading font-bold text-2xl text-primary">BookBuddy</h1>
+                <h1 className="font-heading font-bold text-2xl text-primary">Skillbag</h1>
               </div>
               <p className="text-gray-600">Join our community of young readers!</p>
             </div>
@@ -238,7 +238,7 @@ export default function AuthPage() {
           </div>
           
           {/* Hero Section */}
-          <div className="w-full md:w-1/2 bg-gradient-to-r from-primary to-accent text-white p-8 flex flex-col justify-center">
+          <div className="w-full md:w-1/2 bg-gradient-to-br from-primary via-accent to-secondary text-white p-8 flex flex-col justify-center">
             <h2 className="font-heading font-bold text-3xl mb-4">Discover the Joy of Reading!</h2>
             <ul className="space-y-4">
               <li className="flex items-start">

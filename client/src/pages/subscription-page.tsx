@@ -91,7 +91,7 @@ export default function SubscriptionPage() {
     <div className="min-h-screen flex flex-col">
       <NavBar />
       
-      <section className="py-12 bg-gradient-to-r from-primary to-accent text-white">
+      <section className="py-12 bg-gradient-to-br from-primary via-accent to-secondary text-white">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="font-heading font-bold text-3xl md:text-4xl mb-4">Develop a Love for Reading in Your Child</h2>
@@ -223,7 +223,7 @@ export default function SubscriptionPage() {
                           <span className="text-gray-600 text-sm ml-1">/ {plan.period}</span>
                         </div>
                         {plan.discount && (
-                          <span className="inline-block mt-2 text-xs bg-green-100 text-green-800 px-2 py-1 rounded-full">
+                          <span className="inline-block mt-2 text-xs bg-secondary/20 text-secondary px-2 py-1 rounded-full">
                             {plan.discount}
                           </span>
                         )}
@@ -231,23 +231,23 @@ export default function SubscriptionPage() {
                       
                       <div className="space-y-3 mb-6">
                         <div className="flex items-center">
-                          <Check className="text-success mr-2 h-5 w-5 flex-shrink-0" />
+                          <Check className="text-secondary mr-2 h-5 w-5 flex-shrink-0" />
                           <span>3 new books delivered monthly</span>
                         </div>
                         <div className="flex items-center">
-                          <Check className="text-success mr-2 h-5 w-5 flex-shrink-0" />
+                          <Check className="text-secondary mr-2 h-5 w-5 flex-shrink-0" />
                           <span>Personalized book selection</span>
                         </div>
                         <div className="flex items-center">
-                          <Check className="text-success mr-2 h-5 w-5 flex-shrink-0" />
+                          <Check className="text-secondary mr-2 h-5 w-5 flex-shrink-0" />
                           <span>Dedicated book buddy</span>
                         </div>
                         <div className="flex items-center">
-                          <Check className="text-success mr-2 h-5 w-5 flex-shrink-0" />
+                          <Check className="text-secondary mr-2 h-5 w-5 flex-shrink-0" />
                           <span>Free pickup service</span>
                         </div>
                         <div className="flex items-center">
-                          <Check className="text-success mr-2 h-5 w-5 flex-shrink-0" />
+                          <Check className="text-secondary mr-2 h-5 w-5 flex-shrink-0" />
                           <span>Reading progress tracking</span>
                         </div>
                       </div>
@@ -278,52 +278,52 @@ export default function SubscriptionPage() {
                 <div className="overflow-x-auto">
                   <table className="w-full border-collapse">
                     <thead>
-                      <tr className="bg-gray-100">
-                        <th className="px-4 py-3 text-left">Feature</th>
-                        <th className="px-4 py-3 text-center">Free</th>
-                        <th className="px-4 py-3 text-center bg-primary/5">Premium</th>
+                      <tr>
+                        <th className="px-4 py-3 text-left font-heading">Feature</th>
+                        <th className="px-4 py-3 text-center font-heading bg-gray-100">Free</th>
+                        <th className="px-4 py-3 text-center font-heading bg-primary/10 text-primary">Premium</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr className="border-b border-gray-200">
                         <td className="px-4 py-3">Browse Book Library</td>
                         <td className="px-4 py-3 text-center">Limited Preview</td>
-                        <td className="px-4 py-3 text-center bg-primary/5">Full Access</td>
+                        <td className="px-4 py-3 text-center bg-primary/10 font-medium text-primary">Full Access</td>
                       </tr>
                       <tr className="border-b border-gray-200">
                         <td className="px-4 py-3">Book Delivery</td>
                         <td className="px-4 py-3 text-center">—</td>
-                        <td className="px-4 py-3 text-center bg-primary/5">3 Books Monthly</td>
+                        <td className="px-4 py-3 text-center bg-primary/10 font-medium text-primary">3 Books Monthly</td>
                       </tr>
                       <tr className="border-b border-gray-200">
                         <td className="px-4 py-3">Reading Progress Tracking</td>
                         <td className="px-4 py-3 text-center">—</td>
-                        <td className="px-4 py-3 text-center bg-primary/5">Unlimited</td>
+                        <td className="px-4 py-3 text-center bg-primary/10 font-medium text-primary">Unlimited</td>
                       </tr>
                       <tr className="border-b border-gray-200">
                         <td className="px-4 py-3">Reading Statistics</td>
                         <td className="px-4 py-3 text-center">—</td>
-                        <td className="px-4 py-3 text-center bg-primary/5">Detailed</td>
+                        <td className="px-4 py-3 text-center bg-primary/10 font-medium text-primary">Detailed</td>
                       </tr>
                       <tr className="border-b border-gray-200">
                         <td className="px-4 py-3">Book Reviews</td>
                         <td className="px-4 py-3 text-center">Limited Preview</td>
-                        <td className="px-4 py-3 text-center bg-primary/5">Full Access</td>
+                        <td className="px-4 py-3 text-center bg-primary/10 font-medium text-primary">Full Access</td>
                       </tr>
                       <tr className="border-b border-gray-200">
                         <td className="px-4 py-3">Post Book Reviews</td>
                         <td className="px-4 py-3 text-center">—</td>
-                        <td className="px-4 py-3 text-center bg-primary/5">Unlimited</td>
+                        <td className="px-4 py-3 text-center bg-primary/10 font-medium text-primary">Unlimited</td>
                       </tr>
                       <tr className="border-b border-gray-200">
                         <td className="px-4 py-3">Personal Book Buddy</td>
                         <td className="px-4 py-3 text-center">—</td>
-                        <td className="px-4 py-3 text-center bg-primary/5">Included</td>
+                        <td className="px-4 py-3 text-center bg-primary/10 font-medium text-primary">Included</td>
                       </tr>
                       <tr className="border-b border-gray-200">
                         <td className="px-4 py-3">Reading Goals</td>
                         <td className="px-4 py-3 text-center">—</td>
-                        <td className="px-4 py-3 text-center bg-primary/5">Personalized</td>
+                        <td className="px-4 py-3 text-center bg-primary/10 font-medium text-primary">Personalized</td>
                       </tr>
                     </tbody>
                   </table>
