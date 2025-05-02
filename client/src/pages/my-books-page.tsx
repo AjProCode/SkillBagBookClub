@@ -3,16 +3,18 @@ import { useQuery, useMutation } from "@tanstack/react-query";
 import NavBar from "@/components/nav-bar";
 import ReadingProgress from "@/components/ui/reading-progress";
 import { Button } from "@/components/ui/button";
+import SubscriptionRequired from "@/components/ui/subscription-required";
 import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { apiRequest, queryClient } from "@/lib/queryClient";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/hooks/use-auth";
 import { Book, UserBook } from "@shared/schema";
+import { BookOpen, TrendingUp, Clock, Award, Target } from "lucide-react";
 
 const updateProgressSchema = z.object({
   bookId: z.string(),
@@ -24,8 +26,10 @@ type UpdateProgressValues = z.infer<typeof updateProgressSchema>;
 export default function MyBooksPage() {
   const [dialogOpen, setDialogOpen] = useState(false);
   const { toast } = useToast();
+  const { user } = useAuth();
+  const hasSubscription = !!user?.subscription;
 
-  const { data: readingStats } = useQuery<{
+  const { data: readingStats, error: statsError, isLoading: statsLoading } = useQuery<{
     booksRead: number;
     readingStreak: number;
     hoursRead: number;
@@ -34,10 +38,12 @@ export default function MyBooksPage() {
     yearlyProgress: number;
   }>({
     queryKey: ['/api/reading-stats'],
+    retry: hasSubscription ? 3 : 0, // Don't retry if user doesn't have subscription
   });
 
-  const { data: currentlyReading, isLoading: loadingBooks } = useQuery<UserBook[]>({
+  const { data: currentlyReading, error: booksError, isLoading: loadingBooks } = useQuery<UserBook[]>({
     queryKey: ['/api/my-books'],
+    retry: hasSubscription ? 3 : 0, // Don't retry if user doesn't have subscription
   });
 
   const { data: availableBooks } = useQuery<Book[]>({
@@ -57,6 +63,13 @@ export default function MyBooksPage() {
         description: "Your reading progress has been updated successfully.",
       });
     },
+    onError: (error: any) => {
+      toast({
+        title: "Error updating progress",
+        description: error?.message || "An error occurred while updating your reading progress.",
+        variant: "destructive",
+      });
+    }
   });
 
   const addBookMutation = useMutation({
@@ -72,6 +85,23 @@ export default function MyBooksPage() {
         description: "The book has been added to your reading list.",
       });
     },
+    onError: (error: any) => {
+      // Handle subscription required error
+      if (error?.message?.includes("Subscription required") || error?.code === "SUBSCRIPTION_REQUIRED") {
+        toast({
+          title: "Subscription required",
+          description: "You need to subscribe to add books to your reading list.",
+          variant: "destructive",
+        });
+        setDialogOpen(false);
+      } else {
+        toast({
+          title: "Error adding book",
+          description: error?.message || "An error occurred while adding the book.",
+          variant: "destructive",
+        });
+      }
+    }
   });
 
   const form = useForm<{ bookId: string }>({
@@ -83,6 +113,72 @@ export default function MyBooksPage() {
   const onSubmit = (values: { bookId: string }) => {
     addBookMutation.mutate(values.bookId);
   };
+
+  // Check if subscription is required (based on API response errors)
+  const subscriptionRequired = 
+    (statsError && statsError?.message?.includes("Subscription required")) || 
+    (booksError && booksError?.message?.includes("Subscription required"));
+
+  // If user doesn't have subscription or we got subscription required errors, show subscription prompt
+  if (!hasSubscription || subscriptionRequired) {
+    return (
+      <div className="min-h-screen flex flex-col">
+        <NavBar />
+        
+        <section className="py-12 bg-white flex-grow">
+          <div className="container mx-auto px-4">
+            <h2 className="font-heading font-bold text-2xl md:text-3xl mb-8">My Reading Journey</h2>
+
+            <div className="max-w-4xl mx-auto">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                  <div className="bg-primary/5 rounded-xl p-6 mb-6">
+                    <h3 className="font-heading font-semibold text-xl mb-4">Subscriber Benefits</h3>
+                    <ul className="space-y-4">
+                      <li className="flex">
+                        <BookOpen className="h-5 w-5 text-primary mr-3 mt-0.5 flex-shrink-0" />
+                        <span>Track your reading progress across all your books</span>
+                      </li>
+                      <li className="flex">
+                        <TrendingUp className="h-5 w-5 text-primary mr-3 mt-0.5 flex-shrink-0" />
+                        <span>Build reading streaks and earn rewards</span>
+                      </li>
+                      <li className="flex">
+                        <Clock className="h-5 w-5 text-primary mr-3 mt-0.5 flex-shrink-0" />
+                        <span>Log reading hours and improve your skills</span>
+                      </li>
+                      <li className="flex">
+                        <Award className="h-5 w-5 text-primary mr-3 mt-0.5 flex-shrink-0" />
+                        <span>Level up your reading journey and earn badges</span>
+                      </li>
+                      <li className="flex">
+                        <Target className="h-5 w-5 text-primary mr-3 mt-0.5 flex-shrink-0" />
+                        <span>Set and achieve reading goals with progress tracking</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div className="bg-yellow-50 rounded-xl p-6 border border-yellow-100">
+                    <h3 className="font-heading font-semibold text-lg mb-2">Did you know?</h3>
+                    <p className="text-gray-700">
+                      Children who read just 20 minutes per day are exposed to approximately 1.8 million words per year and score in the 90th percentile on standardized tests.
+                    </p>
+                  </div>
+                </div>
+                
+                <div>
+                  <SubscriptionRequired 
+                    featureName="Reading Progress Tracking" 
+                    description="Subscribe to track your reading journey, earn rewards, and get physical books delivered to your doorstep every month!"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen flex flex-col">

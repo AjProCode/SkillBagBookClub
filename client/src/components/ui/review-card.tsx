@@ -1,11 +1,20 @@
 import { format } from "date-fns";
 import { BookReview } from "@shared/schema";
+import { Lock } from "lucide-react";
+import { Link } from "wouter";
+import { Button } from "./button";
+import { useAuth } from "@/hooks/use-auth";
 
 interface ReviewCardProps {
-  review: BookReview;
+  review: BookReview & {
+    isPreview?: boolean;
+  };
 }
 
 export default function ReviewCard({ review }: ReviewCardProps) {
+  const { user } = useAuth();
+  const hasSubscription = !!user?.subscription;
+  
   const renderStars = (rating: number) => {
     return (
       <div className="flex">
@@ -38,7 +47,14 @@ export default function ReviewCard({ review }: ReviewCardProps) {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-md p-4 md:p-6 card-hover">
+    <div className={`bg-white rounded-xl shadow-md p-4 md:p-6 card-hover ${review.isPreview ? 'relative' : ''}`}>
+      {review.isPreview && (
+        <div className="absolute top-2 right-2 bg-yellow-100 text-yellow-700 px-2 py-1 rounded-full text-xs flex items-center gap-1 shadow-md z-10">
+          <Lock className="h-3 w-3" />
+          <span>Preview</span>
+        </div>
+      )}
+      
       <div className="flex items-center mb-4">
         <div className="h-10 w-10 rounded-full bg-primary text-white flex items-center justify-center">
           {review.user.username.charAt(0).toUpperCase()}
@@ -60,20 +76,31 @@ export default function ReviewCard({ review }: ReviewCardProps) {
         </div>
       </div>
       <p className="text-gray-700 mb-3">{review.review}</p>
-      {review.favoriteCharacter && (
+      {review.favoriteCharacter && !review.isPreview && (
         <p className="text-gray-600 text-sm italic mb-3">
           <span className="font-semibold">Favorite character: </span>{review.favoriteCharacter}
         </p>
       )}
+      
+      {review.isPreview && !hasSubscription && (
+        <div className="mt-3 mb-4">
+          <Link href="/subscription">
+            <Button size="sm" variant="outline" className="w-full text-xs">
+              Subscribe to See Full Reviews
+            </Button>
+          </Link>
+        </div>
+      )}
+      
       <div className="flex justify-between text-sm text-gray-500">
         <span title={formatDate(review.createdAt)}>
           Posted {getTimeSince(review.createdAt)}
         </span>
         <div className="flex items-center">
-          <button className="flex items-center mr-3">
+          <button className="flex items-center mr-3" disabled={review.isPreview}>
             <i className="ri-thumb-up-line mr-1"></i> {review.likes}
           </button>
-          <button className="flex items-center">
+          <button className="flex items-center" disabled={review.isPreview}>
             <i className="ri-chat-1-line mr-1"></i> {review.comments}
           </button>
         </div>
