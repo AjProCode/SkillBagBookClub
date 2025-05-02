@@ -8,10 +8,8 @@ interface SkillbagLogoProps {
 }
 
 export function SkillbagLogo({ width = 200, height = 60, className = '', isWhite = false }: SkillbagLogoProps) {
-  // Use the original logo image from the public directory
-  const logoSrc = isWhite 
-    ? "/images/skillbag-logo-white.png" 
-    : "/images/skillbag-logo-original.png";
+  // Use the exact logo image from the attached assets
+  const logoSrc = "/images/skillbag-logo.jpeg";
   
   return (
     <img 
