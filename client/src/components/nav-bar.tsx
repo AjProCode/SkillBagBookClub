@@ -42,7 +42,17 @@ export default function NavBar() {
         <div className="flex items-center">
           <div className="flex items-center">
             <Link href="/" className="flex items-center">
-              <SkillbagLogo height={50} width={200} />
+              <img 
+                src="/assets/skillbag-logo.png"
+                alt="Skillbag Logo"
+                width={200}
+                height={50}
+                style={{ 
+                  objectFit: 'contain', 
+                  display: 'inline-block', 
+                  verticalAlign: 'middle' 
+                }}
+              />
             </Link>
           </div>
         </div>
