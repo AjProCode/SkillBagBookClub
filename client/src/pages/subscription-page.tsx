@@ -166,126 +166,92 @@ export default function SubscriptionPage() {
           
           <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
             <div className="bg-secondary text-white text-center py-6">
-              <h3 className="font-heading font-bold text-2xl">Choose Your Subscription Plan</h3>
-              <p className="text-white/80 mt-2">Select the perfect reading journey for your child</p>
+              <h3 className="font-heading font-bold text-2xl">Premium Subscription Plan</h3>
+              <p className="text-white/80 mt-2">The perfect reading journey for your child</p>
             </div>
             
             <div className="p-8">
-              <Tabs defaultValue="quarterly" onValueChange={(value) => setSelectedPlan(value as PlanType)}>
-                <TabsList className="grid grid-cols-2 md:grid-cols-4 mb-8 p-1 bg-gray-100 rounded-lg">
-                  <TabsTrigger value="monthly" className="rounded-md">Monthly</TabsTrigger>
-                  <TabsTrigger value="quarterly" className="rounded-md">3 Months</TabsTrigger>
-                  <TabsTrigger value="biannual" className="rounded-md">6 Months</TabsTrigger>
-                  <TabsTrigger value="annual" className="rounded-md">Annual</TabsTrigger>
-                </TabsList>
+              <div className="bg-secondary/5 rounded-xl p-8 relative border-2 border-secondary/10 transition-all hover:border-primary hover:shadow-lg">
+                <div className="absolute top-0 right-0 bg-primary text-white text-xs font-bold px-4 py-1.5 rounded-bl-lg rounded-tr-xl">
+                  PREMIUM PLAN
+                </div>
                 
-                {Object.entries(plans).map(([key, plan]) => (
-                  <TabsContent key={key} value={key} className="mt-0">
-                    <div className="bg-secondary/5 rounded-xl p-8 relative border-2 border-secondary/10 transition-all hover:border-primary hover:shadow-lg">
-                      {plan.recommended && (
-                        <div className="absolute top-0 right-0 bg-primary text-white text-xs font-bold px-4 py-1.5 rounded-bl-lg rounded-tr-xl">
-                          RECOMMENDED
-                        </div>
-                      )}
-                      
-                      <div className="text-center mb-8">
-                        <h4 className="font-heading font-bold text-2xl text-gray-800">{plan.name} Plan</h4>
-                        <div className="mt-4">
-                          {plan.originalPrice && (
-                            <span className="text-gray-500 text-sm line-through mr-2">₹{plan.originalPrice}</span>
-                          )}
-                          <span className="font-heading font-bold text-4xl text-primary">₹{plan.price}</span>
-                          <span className="text-gray-600 text-sm ml-1">/ {plan.period}</span>
-                        </div>
-                        {plan.discount && (
-                          <span className="inline-block mt-3 text-sm font-medium bg-secondary/20 text-secondary px-3 py-1 rounded-full">
-                            {plan.discount}
-                          </span>
-                        )}
-                      </div>
-                      
-                      <div className="space-y-4 mb-8">
-                        <div className="flex items-center p-3 rounded-lg hover:bg-secondary/10 transition-colors">
-                          <div className="bg-accent p-2 rounded-full">
-                            <BookOpen className="text-white h-5 w-5 flex-shrink-0" />
-                          </div>
-                          <span className="ml-3 font-medium">3 new books delivered monthly</span>
-                        </div>
-                        <div className="flex items-center p-3 rounded-lg hover:bg-secondary/10 transition-colors">
-                          <div className="bg-accent p-2 rounded-full">
-                            <Target className="text-white h-5 w-5 flex-shrink-0" />
-                          </div>
-                          <span className="ml-3 font-medium">Personalized book selection</span>
-                        </div>
-                        <div className="flex items-center p-3 rounded-lg hover:bg-secondary/10 transition-colors">
-                          <div className="bg-accent p-2 rounded-full">
-                            <Users className="text-white h-5 w-5 flex-shrink-0" />
-                          </div>
-                          <span className="ml-3 font-medium">Dedicated book buddy</span>
-                        </div>
-                        <div className="flex items-center p-3 rounded-lg hover:bg-secondary/10 transition-colors">
-                          <div className="bg-accent p-2 rounded-full">
-                            <Truck className="text-white h-5 w-5 flex-shrink-0" />
-                          </div>
-                          <span className="ml-3 font-medium">Free pickup service</span>
-                        </div>
-                        
-                        <div className="flex items-center p-3 rounded-lg hover:bg-secondary/10 transition-colors">
-                          <div className="bg-accent p-2 rounded-full">
-                            <TrendingUp className="text-white h-5 w-5 flex-shrink-0" />
-                          </div>
-                          <span className="ml-3 font-medium">Reading progress tracking</span>
-                        </div>
-                        
-                        {key === "biannual" && (
-                          <div className="flex items-center p-3 rounded-lg bg-secondary/10 transition-colors">
-                            <div className="bg-secondary p-2 rounded-full">
-                              <MessageSquare className="text-white h-5 w-5 flex-shrink-0" />
-                            </div>
-                            <span className="ml-3 font-medium text-secondary">Extended reading buddy support</span>
-                          </div>
-                        )}
-                        
-                        {key === "annual" && (
-                          <>
-                            <div className="flex items-center p-3 rounded-lg bg-secondary/10 transition-colors">
-                              <div className="bg-secondary p-2 rounded-full">
-                                <Gift className="text-white h-5 w-5 flex-shrink-0" />
-                              </div>
-                              <span className="ml-3 font-medium text-secondary">Welcome gift box</span>
-                            </div>
-                            <div className="flex items-center p-3 rounded-lg bg-secondary/10 transition-colors">
-                              <div className="bg-secondary p-2 rounded-full">
-                                <Award className="text-white h-5 w-5 flex-shrink-0" />
-                              </div>
-                              <span className="ml-3 font-medium text-secondary">Priority book selection</span>
-                            </div>
-                          </>
-                        )}
-                      </div>
-                      
-                      <Button 
-                        className="w-full py-6 text-lg bg-secondary hover:bg-secondary/90 transition-colors"
-                        onClick={handleSubscribe}
-                        disabled={subscribeMutation.isPending || !!user?.subscription}
-                      >
-                        {user?.subscription 
-                          ? "Already Subscribed" 
-                          : subscribeMutation.isPending 
-                            ? "Processing..." 
-                            : "Subscribe Now"}
-                      </Button>
+                <div className="text-center mb-8">
+                  <h4 className="font-heading font-bold text-2xl text-gray-800">{premiumPlan.name} Plan</h4>
+                  <div className="mt-4">
+                    {premiumPlan.originalPrice && (
+                      <span className="text-gray-500 text-sm line-through mr-2">₹{premiumPlan.originalPrice}</span>
+                    )}
+                    <span className="font-heading font-bold text-4xl text-primary">₹{premiumPlan.price}</span>
+                    <span className="text-gray-600 text-sm ml-1">/ {premiumPlan.period}</span>
+                  </div>
+                  {premiumPlan.discount && (
+                    <span className="inline-block mt-3 text-sm font-medium bg-secondary/20 text-secondary px-3 py-1 rounded-full">
+                      {premiumPlan.discount}
+                    </span>
+                  )}
+                </div>
+                
+                <div className="space-y-4 mb-8">
+                  <div className="flex items-center p-3 rounded-lg hover:bg-secondary/10 transition-colors">
+                    <div className="bg-accent p-2 rounded-full">
+                      <BookOpen className="text-white h-5 w-5 flex-shrink-0" />
                     </div>
-                  </TabsContent>
-                ))}
-              </Tabs>
+                    <span className="ml-3 font-medium">3 new books delivered monthly</span>
+                  </div>
+                  <div className="flex items-center p-3 rounded-lg hover:bg-secondary/10 transition-colors">
+                    <div className="bg-accent p-2 rounded-full">
+                      <Target className="text-white h-5 w-5 flex-shrink-0" />
+                    </div>
+                    <span className="ml-3 font-medium">Personalized book selection</span>
+                  </div>
+                  <div className="flex items-center p-3 rounded-lg hover:bg-secondary/10 transition-colors">
+                    <div className="bg-accent p-2 rounded-full">
+                      <Users className="text-white h-5 w-5 flex-shrink-0" />
+                    </div>
+                    <span className="ml-3 font-medium">Dedicated book buddy</span>
+                  </div>
+                  <div className="flex items-center p-3 rounded-lg hover:bg-secondary/10 transition-colors">
+                    <div className="bg-accent p-2 rounded-full">
+                      <Truck className="text-white h-5 w-5 flex-shrink-0" />
+                    </div>
+                    <span className="ml-3 font-medium">Free pickup service</span>
+                  </div>
+                  
+                  <div className="flex items-center p-3 rounded-lg hover:bg-secondary/10 transition-colors">
+                    <div className="bg-accent p-2 rounded-full">
+                      <TrendingUp className="text-white h-5 w-5 flex-shrink-0" />
+                    </div>
+                    <span className="ml-3 font-medium">Reading progress tracking</span>
+                  </div>
+                  
+                  <div className="flex items-center p-3 rounded-lg bg-secondary/10 transition-colors">
+                    <div className="bg-secondary p-2 rounded-full">
+                      <MessageSquare className="text-white h-5 w-5 flex-shrink-0" />
+                    </div>
+                    <span className="ml-3 font-medium text-secondary">Extended reading buddy support</span>
+                  </div>
+                </div>
+                
+                <Button 
+                  className="w-full py-6 text-lg bg-secondary hover:bg-secondary/90 transition-colors"
+                  onClick={handleSubscribe}
+                  disabled={subscribeMutation.isPending || !!user?.subscription}
+                >
+                  {user?.subscription 
+                    ? "Already Subscribed" 
+                    : subscribeMutation.isPending 
+                      ? "Processing..." 
+                      : "Subscribe Now"}
+                </Button>
+              </div>
               
               <p className="text-center text-gray-600 mt-8 font-medium">
                 Join now and give your child the gift of a lifetime: the love of reading.
               </p>
               
               <div className="mt-12 pt-12 border-t border-gray-200">
-                <h3 className="font-heading font-bold text-xl text-center mb-8">Premium Features Comparison</h3>
+                <h3 className="font-heading font-bold text-xl text-center mb-8">Why Premium Is The Best Choice</h3>
                 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                   {/* Free tier */}

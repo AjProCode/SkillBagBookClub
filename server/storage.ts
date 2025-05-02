@@ -22,6 +22,16 @@ export interface IStorage {
   addBookToUser(userId: number, bookId: number): Promise<schema.UserBook>;
   updateReadingProgress(userId: number, bookId: number, progress: number): Promise<schema.UserBook>;
   
+  // Reading activity methods
+  createReadingActivity(
+    userId: number, 
+    bookId: number, 
+    minutes: number, 
+    date: Date, 
+    notes?: string
+  ): Promise<schema.ReadingActivity>;
+  getReadingActivitiesForBook(userId: number, bookId: number): Promise<schema.ReadingActivity[]>;
+  
   // Reading stats
   getReadingStats(userId: number): Promise<{
     booksRead: number;
