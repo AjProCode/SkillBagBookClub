@@ -98,7 +98,7 @@ export default function HomePage() {
           <div className="flex flex-col md:flex-row justify-between">
             <div className="mb-6 md:mb-0">
               <div className="flex items-center">
-                <img src="/images/skillbag-logo.svg" 
+                <img src="./images/skillbag-logo.svg" 
                   alt="Skillbag Logo" 
                   className="h-12 w-12" />
                 <h2 className="ml-3 font-heading font-bold text-xl">Skillbag</h2>
