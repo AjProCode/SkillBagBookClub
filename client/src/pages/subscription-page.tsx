@@ -207,7 +207,7 @@ export default function SubscriptionPage() {
                 
                 {Object.entries(plans).map(([key, plan]) => (
                   <TabsContent key={key} value={key} className="mt-0">
-                    <div className="bg-gray-50 rounded-xl p-8 relative border-2 border-gray-100 transition-all hover:border-primary hover:shadow-lg">
+                    <div className="bg-secondary/5 rounded-xl p-8 relative border-2 border-secondary/10 transition-all hover:border-primary hover:shadow-lg">
                       {plan.recommended && (
                         <div className="absolute top-0 right-0 bg-primary text-white text-xs font-bold px-4 py-1.5 rounded-bl-lg rounded-tr-xl">
                           RECOMMENDED
@@ -230,38 +230,50 @@ export default function SubscriptionPage() {
                         )}
                       </div>
                       
-                      <div className="space-y-4 mb-8">
-                        <div className="flex items-center p-3 rounded-lg hover:bg-gray-100 transition-colors">
-                          <div className="bg-primary/10 p-2 rounded-full">
-                            <BookOpen className="text-primary h-5 w-5 flex-shrink-0" />
+                      {key === "quarterly" ? (
+                        <div className="space-y-4 mb-8">
+                          <div className="flex items-center p-3 rounded-lg hover:bg-secondary/10 transition-colors">
+                            <div className="bg-accent p-2 rounded-full">
+                              <BookOpen className="text-white h-5 w-5 flex-shrink-0" />
+                            </div>
+                            <span className="ml-3 font-medium">3 new books delivered monthly</span>
                           </div>
-                          <span className="ml-3 font-medium">3 new books delivered monthly</span>
-                        </div>
-                        <div className="flex items-center p-3 rounded-lg hover:bg-gray-100 transition-colors">
-                          <div className="bg-primary/10 p-2 rounded-full">
-                            <Target className="text-primary h-5 w-5 flex-shrink-0" />
+                          <div className="flex items-center p-3 rounded-lg hover:bg-secondary/10 transition-colors">
+                            <div className="bg-accent p-2 rounded-full">
+                              <Target className="text-white h-5 w-5 flex-shrink-0" />
+                            </div>
+                            <span className="ml-3 font-medium">Personalized book selection</span>
                           </div>
-                          <span className="ml-3 font-medium">Personalized book selection</span>
-                        </div>
-                        <div className="flex items-center p-3 rounded-lg hover:bg-gray-100 transition-colors">
-                          <div className="bg-primary/10 p-2 rounded-full">
-                            <Users className="text-primary h-5 w-5 flex-shrink-0" />
+                          <div className="flex items-center p-3 rounded-lg hover:bg-secondary/10 transition-colors">
+                            <div className="bg-accent p-2 rounded-full">
+                              <Users className="text-white h-5 w-5 flex-shrink-0" />
+                            </div>
+                            <span className="ml-3 font-medium">Dedicated book buddy</span>
                           </div>
-                          <span className="ml-3 font-medium">Dedicated book buddy</span>
-                        </div>
-                        <div className="flex items-center p-3 rounded-lg hover:bg-gray-100 transition-colors">
-                          <div className="bg-primary/10 p-2 rounded-full">
-                            <Truck className="text-primary h-5 w-5 flex-shrink-0" />
+                          <div className="flex items-center p-3 rounded-lg hover:bg-secondary/10 transition-colors">
+                            <div className="bg-accent p-2 rounded-full">
+                              <Truck className="text-white h-5 w-5 flex-shrink-0" />
+                            </div>
+                            <span className="ml-3 font-medium">Free pickup service</span>
                           </div>
-                          <span className="ml-3 font-medium">Free pickup service</span>
-                        </div>
-                        <div className="flex items-center p-3 rounded-lg hover:bg-gray-100 transition-colors">
-                          <div className="bg-primary/10 p-2 rounded-full">
-                            <TrendingUp className="text-primary h-5 w-5 flex-shrink-0" />
+                          <div className="flex items-center p-3 rounded-lg hover:bg-secondary/10 transition-colors">
+                            <div className="bg-accent p-2 rounded-full">
+                              <TrendingUp className="text-white h-5 w-5 flex-shrink-0" />
+                            </div>
+                            <span className="ml-3 font-medium">Reading progress tracking</span>
                           </div>
-                          <span className="ml-3 font-medium">Reading progress tracking</span>
                         </div>
-                      </div>
+                      ) : (
+                        <div className="p-6 mb-4 bg-secondary/5 rounded-lg text-center">
+                          <p className="text-gray-600">All premium features included</p>
+                          {key === "biannual" && (
+                            <p className="text-accent font-medium mt-2">+ Extended reading buddy support</p>
+                          )}
+                          {key === "annual" && (
+                            <p className="text-accent font-medium mt-2">+ Special welcome gift & priority book selection</p>
+                          )}
+                        </div>
+                      )}
                       
                       <Button 
                         className="w-full py-6 text-lg bg-secondary hover:bg-secondary/90 transition-colors"
@@ -288,29 +300,29 @@ export default function SubscriptionPage() {
                 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                   {/* Free tier */}
-                  <div className="rounded-xl border border-gray-200 overflow-hidden">
-                    <div className="bg-gray-100 p-4 text-center">
-                      <h4 className="font-heading font-bold text-lg">Free</h4>
-                      <p className="text-sm text-gray-500 mt-1">Basic access</p>
+                  <div className="rounded-xl border border-secondary/10 overflow-hidden bg-secondary/5">
+                    <div className="bg-secondary/10 p-4 text-center">
+                      <h4 className="font-heading font-bold text-lg text-secondary">Free</h4>
+                      <p className="text-sm text-gray-600 mt-1">Basic access</p>
                     </div>
                     <div className="p-6">
                       <ul className="space-y-4">
                         <li className="flex items-start">
-                          <div className="mr-3 text-gray-400 mt-0.5">
+                          <div className="mr-3 text-secondary/70 mt-0.5">
                             <Check className="h-5 w-5" />
                           </div>
                           <div>
                             <p className="font-medium">Limited Book Library</p>
-                            <p className="text-sm text-gray-500">Preview of select books</p>
+                            <p className="text-sm text-gray-600">Preview of select books</p>
                           </div>
                         </li>
                         <li className="flex items-start">
-                          <div className="mr-3 text-gray-400 mt-0.5">
+                          <div className="mr-3 text-secondary/70 mt-0.5">
                             <Check className="h-5 w-5" />
                           </div>
                           <div>
                             <p className="font-medium">Book Reviews</p>
-                            <p className="text-sm text-gray-500">Read limited reviews</p>
+                            <p className="text-sm text-gray-600">Read limited reviews</p>
                           </div>
                         </li>
                         <li className="flex items-start opacity-50">
@@ -319,7 +331,7 @@ export default function SubscriptionPage() {
                           </div>
                           <div>
                             <p className="font-medium">Book Delivery</p>
-                            <p className="text-sm text-gray-500">Not available</p>
+                            <p className="text-sm text-gray-600">Not available</p>
                           </div>
                         </li>
                         <li className="flex items-start opacity-50">
@@ -328,7 +340,7 @@ export default function SubscriptionPage() {
                           </div>
                           <div>
                             <p className="font-medium">Reading Tracker</p>
-                            <p className="text-sm text-gray-500">Not available</p>
+                            <p className="text-sm text-gray-600">Not available</p>
                           </div>
                         </li>
                       </ul>
@@ -336,59 +348,59 @@ export default function SubscriptionPage() {
                   </div>
                   
                   {/* Premium tier */}
-                  <div className="rounded-xl border-2 border-primary shadow-lg relative md:scale-110 z-10">
-                    <div className="absolute top-0 right-0 bg-primary text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
+                  <div className="rounded-xl border-2 border-primary shadow-lg relative md:scale-110 z-10 bg-primary/5">
+                    <div className="absolute top-0 right-0 bg-accent text-white text-xs font-bold px-3 py-1 rounded-bl-lg">
                       POPULAR
                     </div>
                     <div className="bg-primary p-4 text-center text-white">
                       <h4 className="font-heading font-bold text-lg">Premium</h4>
-                      <p className="text-sm text-white/80 mt-1">Complete experience</p>
+                      <p className="text-sm text-white/90 mt-1">Complete experience</p>
                     </div>
                     <div className="p-6">
                       <ul className="space-y-4">
                         <li className="flex items-start">
-                          <div className="mr-3 text-primary mt-0.5">
-                            <Check className="h-5 w-5" />
+                          <div className="mr-3 bg-accent text-white p-1 rounded-full mt-0.5">
+                            <Check className="h-3 w-3" />
                           </div>
                           <div>
                             <p className="font-medium">Full Book Library</p>
-                            <p className="text-sm text-gray-500">Access to all available books</p>
+                            <p className="text-sm text-gray-600">Access to all available books</p>
                           </div>
                         </li>
                         <li className="flex items-start">
-                          <div className="mr-3 text-primary mt-0.5">
-                            <Check className="h-5 w-5" />
+                          <div className="mr-3 bg-accent text-white p-1 rounded-full mt-0.5">
+                            <Check className="h-3 w-3" />
                           </div>
                           <div>
                             <p className="font-medium">Monthly Book Delivery</p>
-                            <p className="text-sm text-gray-500">3 curated books every month</p>
+                            <p className="text-sm text-gray-600">3 curated books every month</p>
                           </div>
                         </li>
                         <li className="flex items-start">
-                          <div className="mr-3 text-primary mt-0.5">
-                            <Check className="h-5 w-5" />
+                          <div className="mr-3 bg-accent text-white p-1 rounded-full mt-0.5">
+                            <Check className="h-3 w-3" />
                           </div>
                           <div>
                             <p className="font-medium">Personal Book Buddy</p>
-                            <p className="text-sm text-gray-500">1-on-1 reading guidance</p>
+                            <p className="text-sm text-gray-600">1-on-1 reading guidance</p>
                           </div>
                         </li>
                         <li className="flex items-start">
-                          <div className="mr-3 text-primary mt-0.5">
-                            <Check className="h-5 w-5" />
+                          <div className="mr-3 bg-accent text-white p-1 rounded-full mt-0.5">
+                            <Check className="h-3 w-3" />
                           </div>
                           <div>
                             <p className="font-medium">Progress Tracking</p>
-                            <p className="text-sm text-gray-500">Detailed reading statistics</p>
+                            <p className="text-sm text-gray-600">Detailed reading statistics</p>
                           </div>
                         </li>
                         <li className="flex items-start">
-                          <div className="mr-3 text-primary mt-0.5">
-                            <Check className="h-5 w-5" />
+                          <div className="mr-3 bg-accent text-white p-1 rounded-full mt-0.5">
+                            <Check className="h-3 w-3" />
                           </div>
                           <div>
                             <p className="font-medium">Book Reviews</p>
-                            <p className="text-sm text-gray-500">Post unlimited reviews</p>
+                            <p className="text-sm text-gray-600">Post unlimited reviews</p>
                           </div>
                         </li>
                       </ul>
@@ -396,47 +408,47 @@ export default function SubscriptionPage() {
                   </div>
                   
                   {/* Premium+ tier */}
-                  <div className="rounded-xl border border-gray-200 overflow-hidden">
+                  <div className="rounded-xl border border-secondary/10 overflow-hidden bg-secondary/5">
                     <div className="bg-secondary p-4 text-center text-white">
                       <h4 className="font-heading font-bold text-lg">Annual Plan</h4>
-                      <p className="text-sm text-white/80 mt-1">Best value</p>
+                      <p className="text-sm text-white/90 mt-1">Best value</p>
                     </div>
                     <div className="p-6">
                       <ul className="space-y-4">
                         <li className="flex items-start">
-                          <div className="mr-3 text-secondary mt-0.5">
-                            <Check className="h-5 w-5" />
+                          <div className="mr-3 bg-secondary text-white p-1 rounded-full mt-0.5">
+                            <Check className="h-3 w-3" />
                           </div>
                           <div>
                             <p className="font-medium">All Premium Features</p>
-                            <p className="text-sm text-gray-500">Everything in Premium plan</p>
+                            <p className="text-sm text-gray-600">Everything in Premium plan</p>
                           </div>
                         </li>
                         <li className="flex items-start">
-                          <div className="mr-3 text-secondary mt-0.5">
-                            <Star className="h-5 w-5" />
+                          <div className="mr-3 bg-secondary text-white p-1 rounded-full mt-0.5">
+                            <Star className="h-3 w-3" />
                           </div>
                           <div>
                             <p className="font-medium">Biggest Discount</p>
-                            <p className="text-sm text-gray-500">Save up to ₹4,388 per year</p>
+                            <p className="text-sm text-gray-600">Save up to ₹4,388 per year</p>
                           </div>
                         </li>
                         <li className="flex items-start">
-                          <div className="mr-3 text-secondary mt-0.5">
-                            <Gift className="h-5 w-5" />
+                          <div className="mr-3 bg-secondary text-white p-1 rounded-full mt-0.5">
+                            <Gift className="h-3 w-3" />
                           </div>
                           <div>
                             <p className="font-medium">Welcome Gift</p>
-                            <p className="text-sm text-gray-500">Special bookshelf or organizer</p>
+                            <p className="text-sm text-gray-600">Special bookshelf or organizer</p>
                           </div>
                         </li>
                         <li className="flex items-start">
-                          <div className="mr-3 text-secondary mt-0.5">
-                            <Award className="h-5 w-5" />
+                          <div className="mr-3 bg-secondary text-white p-1 rounded-full mt-0.5">
+                            <Award className="h-3 w-3" />
                           </div>
                           <div>
                             <p className="font-medium">Premium Book Selections</p>
-                            <p className="text-sm text-gray-500">Priority for new releases</p>
+                            <p className="text-sm text-gray-600">Priority for new releases</p>
                           </div>
                         </li>
                       </ul>
