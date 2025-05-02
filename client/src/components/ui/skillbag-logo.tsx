@@ -8,55 +8,55 @@ interface SkillbagLogoProps {
 }
 
 export function SkillbagLogo({ width = 200, height = 48, className = '', isWhite = false }: SkillbagLogoProps) {
-  // Colors
-  const orangeColor = isWhite ? "#FFFFFF" : "#FF6B00"; 
-  const blueColor = isWhite ? "#FFFFFF" : "#1E3A8A";
+  // Colors based on the exact image
+  const orangeColor = isWhite ? "#FFFFFF" : "#FF7F00"; 
+  const blueColor = isWhite ? "#FFFFFF" : "#1A237E";
   
   return (
     <svg 
       width={width} 
       height={height} 
-      viewBox="0 0 300 60" 
+      viewBox="0 0 400 48" 
       xmlns="http://www.w3.org/2000/svg"
       className={className}
       style={{ display: 'inline-block', verticalAlign: 'middle' }}
     >
-      {/* Orange Spiral */}
-      <g transform="translate(5, 5) scale(0.45)">
+      {/* Logo Group */}
+      <g>
+        {/* Orange Spiral/Swirl - exact match to image */}
         <path 
-          d="M90,72 C90,20 20,20 20,72 C20,124 90,124 90,72 C90,52 70,52 70,72 C70,92 90,92 90,72" 
+          d="M45,24 C45,8 3,8 3,24 C3,40 45,40 45,24 C45,16 30,16 30,24 C30,32 45,32 45,24" 
           fill={orangeColor}
-          stroke={orangeColor}
-          strokeWidth="12"
+          strokeWidth="0"
         />
-      </g>
-      
-      {/* Skillbag Text */}
-      <g transform="translate(55, 0) scale(0.5)">
-        {/* S */}
-        <path d="M28,35 C12,35 5,45 5,55 C5,68 15,75 28,80 C42,85 47,90 47,102 C47,116 37,125 20,125 C10,125 0,120 0,105 L12,105 C12,114 16,117 23,117 C33,117 38,112 38,100 C38,87 28,82 15,77 C5,72 -2,65 -2,50 C-2,35 8,25 25,25 C38,25 46,32 46,50 L34,50 C34,40 30,35 28,35Z" fill={blueColor}/>
         
-        {/* k */}
-        <path d="M60,30 L60,65 L95,30 L112,30 L80,60 L115,120 L95,120 L70,70 L60,80 L60,120 L50,120 L50,30 L60,30Z" fill={blueColor}/>
-        
-        {/* i */}
-        <path d="M130,30 L130,120 L120,120 L120,30 L130,30Z" fill={blueColor}/>
-        <circle cx="125" cy="15" r="10" fill={orangeColor}/>
-        
-        {/* l */}
-        <path d="M160,30 L160,120 L150,120 L150,30 L160,30Z" fill={blueColor}/>
-        
-        {/* l */}
-        <path d="M190,30 L190,120 L180,120 L180,30 L190,30Z" fill={blueColor}/>
-        
-        {/* b */}
-        <path d="M220,30 L220,120 L210,120 L210,95 C205,115 195,125 180,125 C165,125 155,115 155,85 C155,55 170,40 185,40 C200,40 205,50 210,60 L210,30 L220,30Z M185,50 C170,50 165,65 165,85 C165,105 170,115 185,115 C200,115 210,100 210,80 C210,60 200,50 185,50Z" fill={blueColor}/>
-        
-        {/* a */}
-        <path d="M260,40 C275,40 290,50 290,80 L290,120 L280,120 L280,105 C275,120 265,125 255,125 C235,125 225,115 225,100 C225,80 240,70 265,70 L280,70 L280,65 C280,55 270,50 260,50 C250,50 245,55 245,70 L235,70 C235,50 245,40 260,40Z M255,80 C240,80 235,90 235,100 C235,110 245,115 255,115 C275,115 280,100 280,90 L280,80 L255,80Z" fill={blueColor}/>
-
-        {/* g */}
-        <path d="M340,40 C355,40 365,55 365,85 C365,115 350,130 335,130 C320,130 315,120 310,110 L310,160 L300,160 L300,45 L310,45 L310,70 C315,50 325,40 340,40Z M335,50 C320,50 310,65 310,85 C310,105 320,120 335,120 C350,120 355,105 355,85 C355,65 350,50 335,50Z" fill={blueColor}/>
+        {/* Text "Skillbag" */}
+        <g transform="translate(55, 4)">
+          {/* S */}
+          <path d="M14,4 C8,4 4,8 4,13 C4,18 8,20 14,22 C20,24 23,26 23,31 C23,36 19,40 14,40 C7,40 3,35 3,29 L8,29 C8,33 10,35 14,35 C18,35 18,31 18,29 C18,25 14,23 10,21 C4,19 -1,17 -1,10 C-1,4 4,0 13,0 C21,0 24,6 24,12 L19,12 C19,7 16,4 14,4Z" fill={blueColor}/>
+          
+          {/* k */}
+          <path d="M37,1 L37,16 L52,1 L60,1 L44,16 L62,39 L54,39 L40,20 L37,23 L37,39 L32,39 L32,1 L37,1Z" fill={blueColor}/>
+          
+          {/* i */}
+          <path d="M72,1 L72,39 L67,39 L67,1 L72,1Z" fill={blueColor}/>
+          <circle cx="70" cy="-5" r="5" fill={orangeColor}/>
+          
+          {/* l */}
+          <path d="M87,1 L87,39 L82,39 L82,1 L87,1Z" fill={blueColor}/>
+          
+          {/* l */}
+          <path d="M102,1 L102,39 L97,39 L97,1 L102,1Z" fill={blueColor}/>
+          
+          {/* b */}
+          <path d="M117,1 L117,39 L112,39 L112,30 C110,36 105,40 100,40 C90,40 85,33 85,20 C85,7 90,0 100,0 C105,0 110,4 112,10 L112,1 L117,1Z M100,5 C92,5 90,11 90,20 C90,29 92,35 100,35 C108,35 112,29 112,20 C112,11 108,5 100,5Z" fill={blueColor}/>
+          
+          {/* a */}
+          <path d="M135,0 C145,0 150,7 150,20 L150,39 L145,39 L145,30 C143,36 138,40 133,40 C123,40 118,35 118,27 C118,18 123,13 135,13 L145,13 L145,11 C145,8 142,5 135,5 C128,5 127,9 127,13 L122,13 C122,4 128,0 135,0Z M135,18 C125,18 123,23 123,27 C123,31 126,35 133,35 C143,35 145,25 145,23 L145,18 L135,18Z" fill={blueColor}/>
+          
+          {/* g */}
+          <path d="M170,0 C180,0 185,7 185,20 C185,33 180,40 170,40 C165,40 160,36 158,30 L158,48 L153,48 L153,1 L158,1 L158,10 C160,4 165,0 170,0Z M170,5 C162,5 158,11 158,20 C158,29 162,35 170,35 C178,35 180,29 180,20 C180,11 178,5 170,5Z" fill={blueColor}/>
+        </g>
       </g>
     </svg>
   );
