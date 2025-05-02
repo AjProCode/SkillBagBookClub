@@ -1,5 +1,12 @@
 {
+  "version": 2,
+  "buildCommand": "bash ./vercel-build.sh",
+  "devCommand": "npm run dev",
+  "installCommand": "npm install",
+  "framework": "vite",
+  "outputDirectory": "dist",
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/$1" }
+    { "source": "/api/(.*)", "destination": "/api/vercel-api" },
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
