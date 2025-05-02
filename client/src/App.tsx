@@ -14,6 +14,7 @@ import MyBooksPage from "@/pages/my-books-page";
 import ReviewsPage from "@/pages/reviews-page";
 import SubscriptionPage from "@/pages/subscription-page";
 import AdminPage from "@/pages/admin-page";
+import QuizPage from "@/pages/quiz-page";
 
 function Router() {
   return (
@@ -24,6 +25,7 @@ function Router() {
       <ProtectedRoute path="/my-books" component={MyBooksPage} />
       <ProtectedRoute path="/reviews" component={ReviewsPage} />
       <ProtectedRoute path="/subscription" component={SubscriptionPage} />
+      <ProtectedRoute path="/quiz" component={QuizPage} />
       <ProtectedRoute path="/admin" component={AdminPage} />
       <Route component={NotFound} />
     </Switch>

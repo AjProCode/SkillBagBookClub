@@ -1,6 +1,6 @@
 # Deploying Skillbag Book Club on Vercel
 
-This guide walks you through deploying your Skillbag Book Club application on Vercel, including fixes for the 404 NOT_FOUND error.
+This guide walks you through deploying your Skillbag Book Club application on Vercel, with a simplified approach to fix the 404 NOT_FOUND error.
 
 ## Prerequisites
 
@@ -10,11 +10,12 @@ This guide walks you through deploying your Skillbag Book Club application on Ve
 
 ## Important Files for Vercel Deployment
 
-We've created special files to ensure your application works properly on Vercel:
+We've created simplified files to ensure your application works properly on Vercel:
 
-1. **vercel.json** - Configuration file for Vercel with optimized settings
-2. **api/index.js** - Serverless function entry point that works with Vercel's architecture
-3. **VERCEL_TROUBLESHOOTING.md** - Detailed troubleshooting guide if you encounter issues
+1. **vercel.json** - Minimal configuration for Vercel routing
+2. **api/index.js** - Simple API status endpoint
+3. **api/health.js** - Health check endpoint
+4. **api/db-test.js** - Database connectivity test endpoint
 
 ## Deployment Steps
 

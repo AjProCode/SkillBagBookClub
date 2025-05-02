@@ -19,7 +19,8 @@ import {
   MessageSquare, 
   User, 
   LogOut, 
-  Menu 
+  Menu,
+  BrainCircuit 
 } from "lucide-react";
 
 export default function NavBar() {
@@ -78,6 +79,12 @@ export default function NavBar() {
               Reviews
             </Link>
             <Link 
+              href="/quiz" 
+              className={`font-heading font-medium ${isActive("/quiz") ? "text-primary" : "text-dark hover:text-primary"} transition`}
+            >
+              Book Quiz
+            </Link>
+            <Link 
               href="/subscription" 
               className={`font-heading font-medium ${isActive("/subscription") ? "text-primary" : "text-dark hover:text-primary"} transition`}
             >
@@ -126,7 +133,7 @@ export default function NavBar() {
       
       {isMobile && (
         <nav className={`bg-white border-t border-gray-100 ${!mobileMenuOpen ? 'hidden' : ''}`}>
-          <div className="container mx-auto px-4 py-2 flex justify-between">
+          <div className="container mx-auto px-4 py-2 grid grid-cols-5">
             <Link href="/library" className="text-center flex-1 py-2">
               <BookOpen className="mx-auto block" />
               <span className="text-xs mt-1 block">Library</span>
@@ -134,6 +141,10 @@ export default function NavBar() {
             <Link href="/my-books" className="text-center flex-1 py-2">
               <BookCopy className="mx-auto block" />
               <span className="text-xs mt-1 block">My Books</span>
+            </Link>
+            <Link href="/quiz" className="text-center flex-1 py-2">
+              <BrainCircuit className="mx-auto block" />
+              <span className="text-xs mt-1 block">Quiz</span>
             </Link>
             <Link href="/reviews" className="text-center flex-1 py-2">
               <MessageSquare className="mx-auto block" />

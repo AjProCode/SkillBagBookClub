@@ -1,71 +1,68 @@
-# Vercel Deployment Troubleshooting Guide
+# Simplified Vercel Deployment Troubleshooting Guide
 
-If you're experiencing 404 NOT_FOUND errors or other issues with your Vercel deployment, follow this step-by-step troubleshooting guide.
+If you're experiencing 404 NOT_FOUND errors or other issues with your Vercel deployment, follow this simplified troubleshooting approach.
 
-## Critical Fix for 404 Error (bom1::n5sv8-XXXXXXX)
+## Simple Fix for 404 Error (bom1::n5sv8-XXXXXXX)
 
-If you're seeing a 404 error with an ID like `bom1::n5sv8-1746192916070-3ae8d2b58061`, the issue is specifically related to how Vercel is handling your server-side JavaScript and API routes. We've created several specific fixes:
+We've created a simplified approach that's more compatible with Vercel's serverless architecture:
 
-### 1. Updated vercel.json
+### 1. Simplified vercel.json
 
-We've updated the `vercel.json` file to use Vercel's newer configuration format:
+We've simplified the `vercel.json` file to use Vercel's basic configuration:
 
 ```json
 {
-  "version": 2,
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "installCommand": "npm install",
-  "framework": "vite",
-  "functions": {
-    "api/*.js": {
-      "memory": 1024,
-      "maxDuration": 10
-    }
-  },
   "rewrites": [
-    { "source": "/api/(.*)", "destination": "/api/index.js" },
-    { "source": "/(.*)", "destination": "/index.html" }
-  ],
-  "env": {
-    "NODE_ENV": "production"
-  }
+    { "source": "/api/(.*)", "destination": "/api/$1" }
+  ]
 }
 ```
 
-### 2. Created Vercel Serverless Function
+### 2. Created Simple Vercel Serverless Functions
 
-We've added a dedicated API file at `api/index.js` to handle Vercel's serverless function approach:
+We've added several simple API files that are compatible with Vercel:
 
 ```javascript
-// api/index.js - Vercel serverless function
-import express from 'express';
-import { registerRoutes } from '../server/routes.js';
+// api/index.js - Simple status endpoint
+export default function handler(req, res) {
+  res.status(200).json({ 
+    status: 'ok',
+    message: 'Skillbag Book Club API is running',
+    time: new Date().toISOString()
+  });
+}
 
-// Create Express app
-const app = express();
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+// api/health.js - Health check endpoint
+export default function handler(req, res) {
+  res.status(200).json({ 
+    status: 'healthy',
+    environment: process.env.NODE_ENV || 'development',
+    time: new Date().toISOString()
+  });
+}
 
-// Basic logging middleware
-app.use((req, res, next) => {
-  console.log(`${req.method} ${req.path}`);
-  next();
-});
+// api/db-test.js - Database connectivity test
+import { pool } from '../db/index.js';
 
-// Setup all routes
-registerRoutes(app);
-
-// Error handler
-app.use((err, _req, res, _next) => {
-  console.error('Server error:', err);
-  const status = err.status || err.statusCode || 500;
-  const message = err.message || "Internal Server Error";
-  res.status(status).json({ message });
-});
-
-// Export for Vercel
-export default app;
+export default async function handler(req, res) {
+  try {
+    const result = await pool.query('SELECT NOW() as time');
+    
+    res.status(200).json({
+      status: 'success',
+      message: 'Database connection successful',
+      serverTime: result.rows[0].time
+    });
+  } catch (error) {
+    console.error('Database connection error:', error);
+    
+    res.status(500).json({
+      status: 'error',
+      message: 'Database connection failed',
+      error: error.message
+    });
+  }
+}
 ```
 
 ## Environment Variables
