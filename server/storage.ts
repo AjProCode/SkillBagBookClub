@@ -11,7 +11,6 @@ export interface IStorage {
   getUser(id: number): Promise<schema.User>;
   getUserByUsername(username: string): Promise<schema.User | undefined>;
   createUser(user: schema.InsertUser): Promise<schema.User>;
-  getAllUsers(): Promise<schema.User[]>; // For admin panel
   
   // Book methods
   getAllBooks(): Promise<schema.Book[]>;
@@ -22,7 +21,6 @@ export interface IStorage {
   getUserBookByBookId(userId: number, bookId: number): Promise<schema.UserBook | undefined>;
   addBookToUser(userId: number, bookId: number): Promise<schema.UserBook>;
   updateReadingProgress(userId: number, bookId: number, progress: number): Promise<schema.UserBook>;
-  getAllUserBooks(): Promise<schema.UserBook[]>; // For admin panel
   
   // Reading activity methods
   createReadingActivity(
