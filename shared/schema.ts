@@ -1,4 +1,4 @@
-import { pgTable, text, serial, integer, timestamp, boolean, date } from "drizzle-orm/pg-core";
+import { pgTable, text, serial, integer, timestamp, boolean, date, varchar } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 import { relations } from "drizzle-orm";
@@ -77,6 +77,13 @@ export const subscriptions = pgTable("subscriptions", {
   endDate: timestamp("end_date").notNull(),
   status: text("status").notNull(), // "active", "cancelled", "expired"
   createdAt: timestamp("created_at").defaultNow().notNull(),
+});
+
+// Session table for connect-pg-simple
+export const session = pgTable("session", {
+  sid: varchar("sid").primaryKey(),
+  sess: text("sess").notNull(),
+  expire: timestamp("expire").notNull(),
 });
 
 // Define relations

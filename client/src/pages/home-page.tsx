@@ -49,13 +49,17 @@ export default function HomePage() {
                   <div className="bg-accent/10 p-2 rounded-lg">
                     <Star className="h-5 w-5 text-accent" />
                   </div>
-                  <p className="ml-3 font-medium text-gray-700">Special Offer: ₹3000 for 3 months subscription - Save ₹597!</p>
+                  <p className="ml-3 font-medium text-gray-700">Special Offer: ₹3000 for 3 months subscription</p>
                 </div>
+              </div>
+              <div className="mt-4 italic text-gray-600 border-l-4 border-primary/40 pl-4 py-2">
+                "A reader lives a thousand lives before he dies. The man who never reads lives only one." 
+                <span className="block text-sm mt-1">- George R.R. Martin</span>
               </div>
             </div>
             <div className="md:w-1/2 flex justify-center">
-              <img src="https://images.unsplash.com/photo-1551029506-0807df4e2031?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=500&q=80" 
-                alt="Children reading books" 
+              <img src="https://images.unsplash.com/photo-1569307371632-50356e4356f8?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&h=500&q=80" 
+                alt="Teenagers reading books" 
                 className="rounded-2xl shadow-lg max-w-full h-auto" 
                 style={{ maxHeight: "400px" }} />
             </div>
