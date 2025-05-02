@@ -91,98 +91,98 @@ export default function SubscriptionPage() {
     <div className="min-h-screen flex flex-col">
       <NavBar />
       
-      <section className="py-12 bg-gradient-to-br from-primary via-accent to-secondary text-white">
+      <section className="py-12 bg-secondary text-white">
         <div className="container mx-auto px-4 max-w-6xl">
           <div className="text-center mb-12">
             <h2 className="font-heading font-bold text-3xl md:text-4xl mb-4">Develop a Love for Reading in Your Child</h2>
-            <p className="max-w-3xl mx-auto text-lg">
+            <p className="max-w-3xl mx-auto text-lg text-white/90">
               Join our Book Club for ages 7 and above, where we make reading fun, engaging, and rewarding!
             </p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
-            <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl">
+            <div className="bg-accent/10 p-8 rounded-2xl border border-white/20">
               <h3 className="font-heading text-xl font-bold mb-6">Here's how it works:</h3>
               
               <div className="space-y-6">
                 <div className="flex items-start">
-                  <div className="bg-white/20 p-2 rounded-full mr-4">
-                    <BookOpen className="h-6 w-6" />
+                  <div className="bg-accent/30 p-2 rounded-full mr-4">
+                    <BookOpen className="h-6 w-6 text-white" />
                   </div>
                   <div>
                     <h4 className="font-bold mb-1">Personalized Book Selection</h4>
-                    <p className="text-white/80">Our experts carefully select books tailored to your child's interests and reading level.</p>
+                    <p className="text-white/90">Our experts carefully select books tailored to your child's interests and reading level.</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start">
-                  <div className="bg-white/20 p-2 rounded-full mr-4">
-                    <Truck className="h-6 w-6" />
+                  <div className="bg-accent/30 p-2 rounded-full mr-4">
+                    <Truck className="h-6 w-6 text-white" />
                   </div>
                   <div>
                     <h4 className="font-bold mb-1">Convenient Delivery</h4>
-                    <p className="text-white/80">Every month, 3 exciting books will be delivered right to your doorstep.</p>
+                    <p className="text-white/90">Every month, 3 exciting books will be delivered right to your doorstep.</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start">
-                  <div className="bg-white/20 p-2 rounded-full mr-4">
-                    <Package className="h-6 w-6" />
+                  <div className="bg-accent/30 p-2 rounded-full mr-4">
+                    <Package className="h-6 w-6 text-white" />
                   </div>
                   <div>
                     <h4 className="font-bold mb-1">Flexible Reading Schedule</h4>
-                    <p className="text-white/80">Your child will have ample time to enjoy and complete the books before we schedule a hassle-free pickup.</p>
+                    <p className="text-white/90">Your child will have ample time to enjoy and complete the books before we schedule a hassle-free pickup.</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start">
-                  <div className="bg-white/20 p-2 rounded-full mr-4">
-                    <Users className="h-6 w-6" />
+                  <div className="bg-accent/30 p-2 rounded-full mr-4">
+                    <Users className="h-6 w-6 text-white" />
                   </div>
                   <div>
                     <h4 className="font-bold mb-1">Interactive Book Buddy</h4>
-                    <p className="text-white/80">Regular interactions with a dedicated book buddy to keep your child motivated.</p>
+                    <p className="text-white/90">Regular interactions with a dedicated book buddy to keep your child motivated.</p>
                   </div>
                 </div>
               </div>
             </div>
             
-            <div className="bg-white/10 backdrop-blur-sm p-8 rounded-2xl">
+            <div className="bg-primary/10 p-8 rounded-2xl border border-white/20">
               <h3 className="font-heading text-xl font-bold mb-6">Benefits for your child:</h3>
               
               <div className="space-y-6">
                 <div className="flex items-start">
-                  <div className="bg-white/20 p-2 rounded-full mr-4">
-                    <Target className="h-6 w-6" />
+                  <div className="bg-primary/30 p-2 rounded-full mr-4">
+                    <Target className="h-6 w-6 text-white" />
                   </div>
                   <div>
                     <h4 className="font-bold mb-1">Goal Setting</h4>
-                    <p className="text-white/80">We help set achievable reading targets to encourage steady progress.</p>
+                    <p className="text-white/90">We help set achievable reading targets to encourage steady progress.</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start">
-                  <div className="bg-white/20 p-2 rounded-full mr-4">
-                    <MessageSquare className="h-6 w-6" />
+                  <div className="bg-primary/30 p-2 rounded-full mr-4">
+                    <MessageSquare className="h-6 w-6 text-white" />
                   </div>
                   <div>
                     <h4 className="font-bold mb-1">Engaging Book Discussions</h4>
-                    <p className="text-white/80">After finishing each book, your child will participate in lively discussions to deepen their understanding.</p>
+                    <p className="text-white/90">After finishing each book, your child will participate in lively discussions to deepen their understanding.</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start">
-                  <div className="bg-white/20 p-2 rounded-full mr-4">
-                    <TrendingUp className="h-6 w-6" />
+                  <div className="bg-primary/30 p-2 rounded-full mr-4">
+                    <TrendingUp className="h-6 w-6 text-white" />
                   </div>
                   <div>
                     <h4 className="font-bold mb-1">Progressive Reading Levels</h4>
-                    <p className="text-white/80">We gradually increase the complexity of books to match your child's growing reading skills.</p>
+                    <p className="text-white/90">We gradually increase the complexity of books to match your child's growing reading skills.</p>
                   </div>
                 </div>
                 
-                <div className="mt-6 p-4 bg-white/20 rounded-lg">
-                  <p className="text-sm italic">
+                <div className="mt-6 p-4 bg-primary/20 rounded-lg border border-white/10">
+                  <p className="text-sm italic text-white/95">
                     Studies show that a child begins to enjoy reading in about 3 months, and a solid reading habit forms between 6 to 9 months.
                   </p>
                 </div>

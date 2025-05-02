@@ -13,19 +13,19 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
     
-    /* Orange from Skillbag logo */
-    --primary: 30 100% 50%;
+    /* Softer orange from Skillbag logo */
+    --primary: 28 85% 45%;
     --primary-foreground: 0 0% 100%;
     
     /* Navy blue from Skillbag logo */
-    --secondary: 225 75% 25%;
+    --secondary: 225 70% 30%;
     --secondary-foreground: 0 0% 100%;
     
     --muted: 210 40% 96.1%;
     --muted-foreground: 215.4 16.3% 46.9%;
     
-    /* Lighter orange for accents */
-    --accent: 30 100% 65%;
+    /* Teal accent color to balance the palette */
+    --accent: 180 60% 45%;
     --accent-foreground: 0 0% 100%;
     
     --destructive: 0 84.2% 60.2%;
@@ -37,22 +37,22 @@
     
     --radius: 0.5rem;
 
-    /* Chart colors based on Skillbag theme */
-    --chart-1: 30 100% 50%;
-    --chart-2: 225 75% 25%;
-    --chart-3: 30 100% 65%;
-    --chart-4: 225 75% 45%;
-    --chart-5: 30 80% 40%;
+    /* Chart colors based on updated Skillbag theme */
+    --chart-1: 28 85% 45%;
+    --chart-2: 225 70% 30%;
+    --chart-3: 180 60% 45%;
+    --chart-4: 225 60% 50%;
+    --chart-5: 200 70% 40%;
 
-    /* Sidebar styling */
+    /* Sidebar styling with updated colors */
     --sidebar-background: 0 0% 100%;
     --sidebar-foreground: 222 47% 11%;
-    --sidebar-primary: 30 100% 50%;
+    --sidebar-primary: 28 85% 45%;
     --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 225 75% 25%;
+    --sidebar-accent: 225 70% 30%;
     --sidebar-accent-foreground: 0 0% 100%;
     --sidebar-border: 214.3 31.8% 91.4%;
-    --sidebar-ring: 30 100% 50%;
+    --sidebar-ring: 180 60% 45%;
   }
   
   .dark {
@@ -65,20 +65,20 @@
     --popover: 224 71% 4%;
     --popover-foreground: 210 40% 98%;
     
-    /* Brighter orange for dark mode */
-    --primary: 30 100% 60%;
+    /* Softer orange for dark mode */
+    --primary: 28 85% 55%;
     --primary-foreground: 0 0% 100%;
     
     /* Navy blue for dark mode */
-    --secondary: 225 75% 35%;
+    --secondary: 225 60% 40%;
     --secondary-foreground: 0 0% 100%;
     
     --muted: 215 27.9% 16.9%;
     --muted-foreground: 217.9 10.6% 64.9%;
     
-    /* Lighter orange accent for dark mode */
-    --accent: 30 100% 70%;
-    --accent-foreground: 0 0% 100%;
+    /* Teal accent for dark mode */
+    --accent: 180 70% 50%;
+    --accent-foreground: 0 0% 15%;
     
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 210 40% 98%;
